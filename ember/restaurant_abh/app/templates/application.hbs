@@ -10,14 +10,14 @@
   <div class="container">
     <nav class="additional">
       <ul>
-        <li>{{#link-to 'privacypolicy'}}Privacy Policy{{/link-to}}</li>
+        <li>{{#link-to 'termsofuse'}}Privacy Policy{{/link-to}}</li>
         <li>{{#link-to 'termsofuse'}}Terms of use{{/link-to}}</li>
       </ul>
     </nav>
 
     <nav class="main navbar-right">
       <ul>
-        <li>{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li><a href="javascript:void(0);">Home</a></li>
         <li>{{#link-to 'restaurants'}}Restaurants{{/link-to}}</li>
         {{#unless currentUser.userLoggedIn}}
           <li>{{#link-to 'login'}}Login{{/link-to}}</li>

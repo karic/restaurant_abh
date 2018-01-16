@@ -39,10 +39,10 @@ export default Ember.Controller.extend({
             clearTimeout(self.get('t'));
 
             //Erase current reservation
-            self.get('currentReservation').removeReservation();
-            self.set('remainingTime', '03:00');
+            //self.get('currentReservation').removeReservation();
+            //self.set('remainingTime', '03:00');
 
-            history.go(-1);
+            //history.go(-1);
           } else {
             self.set('t', setTimeout(countdownRemainingTime, 1000));
           }

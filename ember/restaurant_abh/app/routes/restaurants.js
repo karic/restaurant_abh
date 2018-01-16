@@ -28,10 +28,13 @@ export default Ember.Route.extend({
     this.set('filter.latitude', self.get('currentLocationCoordinates')[0]);
     this.set('filter.longitude', self.get('currentLocationCoordinates')[1]);
 
-    var data = JSON.stringify(self.get('filter'));
+    var tempData = self.get('filter');
+    tempData = JSON.parse(JSON.stringify(tempData));
+    tempData.location = null;
+    tempData.priceRange = null;
 
     //Get number of pages for display restaurants
-    this.get('ajax').ajaxRequest("/api/v1/getRestaurantsByFilter", "POST", data, false).fail(function(data) {
+    this.get('ajax').ajaxRequest("/api/v1/getRestaurantsByFilter", "POST", JSON.stringify(tempData), false).fail(function(data) {
       console.log(data);
     }).then(function(data) {
       //Set info about number of pages

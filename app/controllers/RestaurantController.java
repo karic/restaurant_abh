@@ -365,13 +365,10 @@ public class RestaurantController extends Controller {
         int offsetRestaurantsInt = (int) offsetRestaurants;
         int itemsPerPageInt = (int) newRestaurantFilter.getItemsPerPage();
 
-        //Create LIMIT part
-        String sqlStringLimit = "LIMIT " + itemsPerPageInt + " OFFSET " + offsetRestaurantsInt;
-
         //Create return
         Restaurant.FilterRestaurantsQueryBuilderDto newRestaurantsFilterQuery = new Restaurant.FilterRestaurantsQueryBuilderDto();
             newRestaurantsFilterQuery.setSqlString(sqlString);
-            newRestaurantsFilterQuery.setSqlStringWithLimit(sqlString + sqlStringLimit);
+            newRestaurantsFilterQuery.setSqlStringWithLimit(sqlString);
             newRestaurantsFilterQuery.setFilterParameters(filterParameters);
 
         return newRestaurantsFilterQuery;
@@ -595,7 +592,7 @@ public class RestaurantController extends Controller {
         List<RestaurantComment> comments = new ArrayList();
 
         //Read from database
-        comments = JPA.em().createQuery("SELECT rc FROM RestaurantComment rc WHERE idRestaurant = ? ORDER BY id DESC", RestaurantComment.class).setParameter(1, inputForm.get().idRestaurant).getResultList();
+        comments = JPA.em().createQuery("SELECT rc FROM RestaurantComment rc WHERE idRestaurant = ? ORDER BY id ASC", RestaurantComment.class).setParameter(1, inputForm.get().idRestaurant).getResultList();
 
         List<RestaurantComment.OutputCommentsDto> outputComments = new ArrayList();
 
@@ -621,7 +618,7 @@ public class RestaurantController extends Controller {
         }
 
         //Return JSON of all restaurants
-        return ok(Json.toJson(outputComments));
+        return ok(Json.toJson(outputComments.get(comments.size() - 1)));
     }
 
     @Transactional

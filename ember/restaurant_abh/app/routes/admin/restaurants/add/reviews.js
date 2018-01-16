@@ -20,7 +20,7 @@ export default Ember.Route.extend({
       false).fail(function(data) {
         console.log(data);
     }).then(function(data) {
-      self.set('listItems', data);
+      self.set('listItems', [data]);
       console.log(self.get('listItems'));
     });
 

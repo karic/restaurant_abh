@@ -45,7 +45,7 @@
              }}
           </div>
           <div class="reservation_column">
-            {{bootstrap-datepicker value=tempReservationDate changeDate="changeDate" class="date_picker" todayHighlight=true format="M d, yyyy" startDate=tempTodayDate autoclose=true}}
+            {{bootstrap-datepicker value=tempReservationDate changeDate="changeDate" class="date_picker" todayHighlight=true format="M d, yyyy" autoclose=true}}
           </div>
           <div class="reservation_column">
             {{ember-selectize
@@ -92,7 +92,7 @@
       </div>
 
       <div class="box_shadow restaurant_data_container" id="menu">
-        <h1 class="title restaurant_menu_item_title"><span style="margin-right:25px;">Menu:</span> <a class="menu_title_Breakfast active" href="javascript:void(0);" {{action 'showMenu' 'Breakfast' model.restaurantDetails.id}}>Breakfast</a><a class="menu_title_Lunch" {{action 'showMenu' 'Lunch' model.restaurantDetails.id}} href="javascript:void(0);">Lunch</a><a class="menu_title_Dinner" {{action 'showMenu' 'Dinner' model.restaurantDetails.id}} href="javascript:void(0);">Dinner</a></h1>
+        <h1 class="title restaurant_menu_item_title"><span style="margin-right:25px;">Menu:</span> <a class="menu_title_Breakfast active" href="javascript:void(0);" {{action 'showMenu' 'Breakfast' model.restaurantDetails.id}}>Breakfast</a><a class="menu_title_Lunch" {{action 'showMenu' 'Lunch' model.restaurantDetails.id}} href="javascript:void(0);">Lunch</a><a class="menu_title_Dinner" {{action 'showMenu' 'Breakfast' model.restaurantDetails.id}} href="javascript:void(0);">Dinner</a></h1>
 
         {{#each model.restaurantMenu as |restaurantMenuItem|}}
           <div class="restaurant_menu_item">

@@ -261,7 +261,7 @@ public class Restaurant {
 
     @Transactional
     public static List<Restaurant> getAllSortByTodayReservations() {
-        List<Restaurant> restaurants = JPA.em().createNativeQuery("SELECT *, (SELECT COUNT(rs.id) FROM reservations rs, restauranttables rt WHERE date_part('day', rs.reservationDateTime) = date_part('day', NOW()) AND rs.idTable = rt.id AND restaurants.id = rt.idRestaurant GROUP BY rt.idRestaurant) AS sortingnumber FROM restaurants ORDER BY sortingnumber DESC nulls last LIMIT 6", Restaurant.class).getResultList();
+        List<Restaurant> restaurants = JPA.em().createNativeQuery("SELECT *, (SELECT COUNT(rs.id) FROM reservations rs, restauranttables rt WHERE rs.idTable = rt.id AND restaurants.id = rt.idRestaurant GROUP BY rt.idRestaurant) AS sortingnumber FROM restaurants ORDER BY sortingnumber DESC nulls last LIMIT 6", Restaurant.class).getResultList();
         return restaurants;
     }
 

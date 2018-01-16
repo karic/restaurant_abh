@@ -296,21 +296,6 @@ UserController extends Controller {
         user = user.findById(inputForm.get().id);
 
         if(user != null){
-            //Update values
-            user.setFirstName(inputForm.get().firstName);
-            user.setLastName(inputForm.get().lastName);
-            user.setEmail(inputForm.get().email);
-            user.setPhone(inputForm.get().phone);
-            user.setCity(inputForm.get().city);
-            user.setCountry(inputForm.get().country);
-
-            if(inputForm.get().password != "") {
-                user.setPassword(User.md5(inputForm.get().password));
-            }
-
-            //Save to database
-            user.update();
-
             return ok(Json.toJson(user));
         } else {
             return badRequest("{\"error\": \"User doesn't exist!\"}");

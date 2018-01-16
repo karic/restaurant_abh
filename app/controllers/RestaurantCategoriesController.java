@@ -38,14 +38,20 @@ import javax.persistence.criteria.Join;
 public class RestaurantCategoriesController extends Controller {
 
     @Transactional
-    @Security.Authenticated(ActionAuthenticator.class)
     public Result getAllCategories() {
         //Declare list
-        List<RestaurantCategories> restaurants = new ArrayList<RestaurantCategories>();
         RestaurantCategories restaurantCategory = new RestaurantCategories();
+        List<RestaurantCategories> restaurantCategories = restaurantCategory.getAll();
+
+        List<RestaurantCategories> tempRestaurantCategories = new ArrayList<RestaurantCategories>();
+        for(int i=0; i<=10; i++) {
+            if (restaurantCategories.get(i) != null) {
+                tempRestaurantCategories.add(restaurantCategories.get(i));
+            }
+        }
 
         //Return JSON of all restaurants
-        return ok(Json.toJson(restaurantCategory.getAll()));
+        return ok(Json.toJson(tempRestaurantCategories));
     }
 
     @Transactional
@@ -145,8 +151,6 @@ public class RestaurantCategoriesController extends Controller {
         //Create category object
         RestaurantCategories category = new RestaurantCategories();
         category = category.findById(categoryForm.get().id);
-
-        category.delete();
 
         return ok();
     }

@@ -125,38 +125,39 @@ public class ReservationController extends Controller {
         //Loop through best times to offfer
         int i = 0;
         do {
-            //Time stamp
-            String reservationDateTimeTest = reservationFormDate + " " + bestTimesArray.get(i);
+            if (bestTimesArray.size() > 1) {
+                //Time stamp
+                String reservationDateTimeTest = reservationFormDate + " " + bestTimesArray.get(i);
 
-            String reservationDateTime = "";
-            SimpleDateFormat formatDateTimeFromEmber = new SimpleDateFormat("MMM d, yyyy hh:mm a");
-            SimpleDateFormat formatToCheckFunction = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            try {
-                //Create date object to insert into database
-                Date parsedReservationDateTime = formatDateTimeFromEmber.parse(reservationDateTimeTest);
+                String reservationDateTime = "";
+                SimpleDateFormat formatDateTimeFromEmber = new SimpleDateFormat("MMM d, yyyy hh:mm a");
+                SimpleDateFormat formatToCheckFunction = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    //Create date object to insert into database
+                    Date parsedReservationDateTime = formatDateTimeFromEmber.parse(reservationDateTimeTest);
 
-                //Create String from Date for checkReservationAvailability method
-                reservationDateTime = formatToCheckFunction.format(parsedReservationDateTime);
+                    //Create String from Date for checkReservationAvailability method
+                    reservationDateTime = formatToCheckFunction.format(parsedReservationDateTime);
 
-                //Current date
-                Date date = new Date();
+                    //Current date
+                    Date date = new Date();
 
-                if(parsedReservationDateTime.compareTo(date) > 0) {
-                    //Get list of all tables for that id restaurant and time
-                    Restaurant restoran = new Restaurant();
-                    List<RestaurantTables> freeTables = new ArrayList<RestaurantTables>();
-                    freeTables = restoran.checkReservationAvailability(persons, reservationDateTime, idRestaurant);
+                    if (parsedReservationDateTime.compareTo(date) > 0) {
+                        //Get list of all tables for that id restaurant and time
+                        Restaurant restoran = new Restaurant();
+                        List<RestaurantTables> freeTables = new ArrayList<RestaurantTables>();
+                        freeTables = restoran.checkReservationAvailability(persons, reservationDateTime, idRestaurant);
 
-                    if(freeTables.size() > 0){
-                        responseReservationCheck.addBestTime(bestTimesArray.get(i));
+                        if (freeTables.size() > 0) {
+                            responseReservationCheck.addBestTime(bestTimesArray.get(i));
+                        }
                     }
+                } catch (ParseException pe) {
+                    System.out.println("ERROR: Cannot parse date in RestaurantController.makeReservation \"" + reservationDateTime + "\"");
                 }
-            }
-            catch(ParseException pe) {
-                System.out.println("ERROR: Cannot parse date in RestaurantController.makeReservation \"" + reservationDateTime + "\"");
-            }
 
-            i++;
+                i++;
+            }
         } while(responseReservationCheck.getBestTime().size() < 4);
 
         return responseReservationCheck.getBestTime();
