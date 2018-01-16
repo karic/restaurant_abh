@@ -1,0 +1,47 @@
+{{#navigation-bar styleClass='navigation_black'}}{{/navigation-bar}}
+<div class="container">
+  <div class="row">
+      <div class="col-md-10 col-center-block">
+        <div class="form-group loginNotifications">
+          <div class="alert alert-danger" role="alert">
+            <div class="alertText"></div>
+          </div>
+        </div>
+      </div>
+  </div>
+  {{#each model.listReservations as |reservation|}}
+      <div class="box_shadow restaurant_data_container" style="margin-bottom:65px;">
+          <h1 class="title">
+            Reservation details
+            <button class="cancel_reservation" {{action 'cancelReservation' reservation.id}}>Cancel reservation</button>
+          </h1>
+
+          <div class="row">
+            <div class="col-md-2">
+              <div class="complete_reservation_restaurant_image" style="background-image:url('{{reservation.imageFileName}}');"></div>
+            </div>
+            <div class="col-md-10 complete_reservation_restaurant_details">
+              <div class="title">RESTAURANT</div>
+              <div class="name">{{reservation.restaurantName}}</div>
+
+              <div class="row">
+                <div class="col-md-2">
+                  <div class="title">GUESTS</div>
+                  <div class="details">{{reservation.guests}}</div>
+                </div>
+                <div class="col-md-3">
+                  <div class="title">DATE</div>
+                  <div class="details">{{reservation.reservationDate}}</div>
+                </div>
+                <div class="col-md-2">
+                  <div class="title">HOUR</div>
+                  <div class="details">{{reservation.reservationHour}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    {{else}}
+      No reservations
+    {{/each}}
+</div>

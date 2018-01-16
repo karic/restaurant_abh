@@ -1,0 +1,37 @@
+### Ember ###
+# see https://github.com/ember-cli/ember-cli/blob/master/blueprints/app/files/gitignore
+# compiled output
+ember/restaurant_abh/dist
+ember/restaurant_abh/tmp
+
+# dependencies
+ember/restaurant_abh/node_modules
+ember/restaurant_abh/bower_components
+
+# misc
+ember/restaurant_abh/.sass-cache
+ember/restaurant_abh/connect.lock
+ember/restaurant_abh/coverage/*
+ember/restaurant_abh/libpeerconnection.log
+ember/restaurant_abh/npm-debug.log
+ember/restaurant_abh/testem.log
+
+### PlayFramework ###
+# Ignore Play! working directory #
+bin/
+/db
+.eclipse
+/lib/
+/logs/
+/modules
+/project/project
+/project/target
+/target
+tmp/
+test-result
+server.pid
+*.eml
+/dist/
+.cache
+
+./idea/

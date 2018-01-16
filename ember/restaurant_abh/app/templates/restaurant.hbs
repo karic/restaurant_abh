@@ -1,0 +1,137 @@
+{{#navigation-bar styleClass='navigation_white'}}{{/navigation-bar}}
+
+<div class="restaurant_header_big">
+  <div class="background" style="background-image:url('{{model.restaurantDetails.coverFileName}}');"></div>
+</div>
+
+<div class="container restaurant_main_container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="restaurant_thumb_container box_shadow">
+        <img src="{{model.restaurantDetails.imageFileName}}" width="210" />
+      </div>
+
+      <ul class="restaurant_left_menu">
+        <li><a class="restaurant_left_menu_title" {{action 'moveToSegment' 'reservation'}} href="javascript:void(0);">Reservation</a></li>
+        <li><a class="restaurant_left_menu_title" {{action 'moveToSegment' 'about'}} href="javascript:void(0);">About</a></li>
+        <li><a class="restaurant_left_menu_title" {{action 'moveToSegment' 'menu'}}href="javascript:void(0);">Menu</a></li>
+      </ul>
+    </div>
+
+
+    <div class="col-md-9" style="padding-left:40px;">
+      <div class="restaurant_details">
+        <h1 class="title">{{model.restaurantDetails.restaurantName}}</h1>
+        <div class="{{model.restaurantsStatsStyle}}">
+          {{#restaurant-star max=5 value=model.restaurantDetails.mark votes=model.restaurantDetails.votes restaurantId=model.restaurantDetails.id}}{{/restaurant-star}}
+          <span class="price_range">
+            {{#restaurant-price-range max=5 value=model.restaurantDetails.priceRange}}{{/restaurant-price-range}}
+          </span>
+          <span class="restaurant_food">{{model.restaurantDetails.foodType}}</span>
+          {{#if model.currentUser.userLoggedIn}}
+            <button type="button" class="btn btn-default restaurant_rate_this_place"  data-toggle="modal" data-target="#votePopup">Rate this place</button>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="box_shadow restaurant_data_container" id="reservation">
+        <h1 class="title">Make a free reservation</h1>
+        <div class="form-group" style="height:54px; overflow:visible;">
+          <div class="reservation_column">
+            {{ember-selectize
+              content=selectPeople
+              value=reservation.people
+              placeholder="How many?"
+             }}
+          </div>
+          <div class="reservation_column">
+            {{bootstrap-datepicker value=tempReservationDate changeDate="changeDate" class="date_picker" todayHighlight=true format="M d, yyyy" startDate=tempTodayDate autoclose=true}}
+          </div>
+          <div class="reservation_column">
+            {{ember-selectize
+              content=selectHour
+              value=reservation.hour
+              placeholder="Pick hour"
+             }}
+          </div>
+          <div class="reservation_column"><button {{action 'findATable' model.restaurantDetails.id}} class="btn button">Find a table</button></div>
+        </div>
+
+        {{#if tablesAvailable}}
+            <div class="availability_text">
+              Availability on {{reservation.date}} around {{reservation.hour}} for {{reservation.people}}:
+            </div>
+
+            <div class="tables_left">
+              <span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding-right:3px; color:#000;"></span> {{tablesAvailable}} tables left
+            </div>
+
+            <h4 class="select_time_best_fits">Select the best time that fits you:</h4>
+
+            <div class="reservation_choose_time">
+              {{#each bestTime as |time|}}
+                <a href="javascript:void(0);" {{action 'proceedToReservationComplete' time model.restaurantDetails.id model.restaurantDetails.restaurantName model.restaurantDetails.imageFileName}}>{{time}}</a>
+              {{/each}}
+            </div>
+        {{/if}}
+        <div class="form-group registerNotifications">
+          <div class="alert alert-danger" role="alert">
+            <div class="alertText">No available tables!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box_shadow restaurant_data_container" id="about">
+        <h1 class="title">About {{model.restaurantDetails.restaurantName}}</h1>
+         {{#g-map lat=model.restaurantDetails.latitude lng=model.restaurantDetails.longitude zoom=17 as |google_mapa|}}
+            {{g-map-marker google_mapa lat=model.restaurantDetails.latitude lng=model.restaurantDetails.longitude title="model.restaurantName"}}
+          {{/g-map}}
+
+        <h2 class="description_title">Description</h2>
+        <div class="description_text">{{model.restaurantDetails.description}}</div>
+      </div>
+
+      <div class="box_shadow restaurant_data_container" id="menu">
+        <h1 class="title restaurant_menu_item_title"><span style="margin-right:25px;">Menu:</span> <a class="menu_title_Breakfast active" href="javascript:void(0);" {{action 'showMenu' 'Breakfast' model.restaurantDetails.id}}>Breakfast</a><a class="menu_title_Lunch" {{action 'showMenu' 'Lunch' model.restaurantDetails.id}} href="javascript:void(0);">Lunch</a><a class="menu_title_Dinner" {{action 'showMenu' 'Dinner' model.restaurantDetails.id}} href="javascript:void(0);">Dinner</a></h1>
+
+        {{#each model.restaurantMenu as |restaurantMenuItem|}}
+          <div class="restaurant_menu_item">
+            <div class="restaurant_menu_item_title_price">
+              <span class="name">{{restaurantMenuItem.name}}</span>
+              <span class="price">${{restaurantMenuItem.price}}</span>
+            </div>
+            <div class="restaurant_menu_item_description">{{restaurantMenuItem.description}}</div>
+          </div>
+        {{else}}
+          Menu is not available
+        {{/each}}
+      </div>
+
+      {{#if model.galleryFirstImage}}
+        <div class="box_shadow restaurant_data_container" style="padding:10px 0px 0px 11px; overflow:auto;" id="gallery">
+          {{#if model.addSeeAllPhotosFeature}}
+            <a class="see_all_photos" {{action 'seeAllPhotos'}}>See All Photos ({{model.galleryNumberOfImages}})</a>
+          {{/if}}
+
+          <h1 class="title restaurant_menu_item_title" style="width:250px; margin-bottom:10px !important; padding:20px;"><span style="margin-right:25px;">Restaurants Photo:</span> </h1>
+
+          <div class="big_image">
+              {{#light-box href=(concat 'https://s3.amazonaws.com/atlantpraksa/gallery/' model.galleryFirstImage.imageFileName) data-lightbox="cat-1" inlineImage=false}}
+                <img src="https://s3.amazonaws.com/atlantpraksa/gallery/{{model.galleryFirstImage.imageFileName}}" />
+              {{/light-box}}
+          </div>
+
+          {{#each model.galleryImages as |image|}}
+            <div class="small_image">
+                {{#light-box href=(concat 'https://s3.amazonaws.com/atlantpraksa/gallery/' image.imageFileName) data-lightbox="cat-1" inlineImage=false}}
+                  <img src="https://s3.amazonaws.com/atlantpraksa/gallery/thumb/{{image.imageFileName}}" />
+                {{/light-box}}
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+
+      <div style="height:300px;"></div>
+    </div>
+  </div>
+</div>

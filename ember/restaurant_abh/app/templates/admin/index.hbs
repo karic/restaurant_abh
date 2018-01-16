@@ -1,0 +1,30 @@
+{{#admin-navigation-bar addOption=false navColumn=12}}{{/admin-navigation-bar}}
+
+<div class="container" style="margin-top:80px; height:400px;">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="administration_homepage_item box_shadow">
+        <div class="number">{{model.counters.restaurantsNumber}}</div>
+        <div class="title">Restaurants</div>
+
+        {{#link-to 'admin.restaurants.add.info' 0 class='add_option'}}Add new restaurant{{/link-to}}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="administration_homepage_item box_shadow">
+        <div class="number">{{model.counters.locationsNumber}}</div>
+        <div class="title">Locations</div>
+
+        {{#link-to 'admin.locations.add' class='add_option'}}Add new location{{/link-to}}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="administration_homepage_item box_shadow">
+        <div class="number">{{model.counters.usersNumber}}</div>
+        <div class="title">Users</div>
+
+        {{#link-to 'admin.users.add' class='add_option'}}Add new user{{/link-to}}
+      </div>
+    </div>
+  </div>
+</div>

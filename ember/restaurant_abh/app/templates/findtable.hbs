@@ -1,0 +1,14 @@
+{{#navigation-bar styleClass='navigation_black'}}{{/navigation-bar}}
+
+<div class="container">
+  <h1 class="complete_reservation_title">Search results</h1>
+
+  {{#each model.restaurants as |restaurant|}}
+    {{#restaurant-reservation-tables proceedToReservationComplete='proceedToReservationComplete' idRestaurant=restaurant.idRestaurant restaurantName=restaurant.restaurantName restaurantImageFilename=restaurant.restaurantImageFilename people=model.currentReservation.people date=model.currentReservation.date hour=model.currentReservation.hour tablesAvailable=restaurant.tablesLeft  bestTime=restaurant.bestTime}}{{/restaurant-reservation-tables}}
+  {{else}}
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      No available restaurants found!
+    </div>
+  {{/each}}
+</div>

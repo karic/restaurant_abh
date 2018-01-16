@@ -1,0 +1,33 @@
+<div id="wrap">
+  <div id="main">
+
+    {{outlet}}
+
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <nav class="additional">
+      <ul>
+        <li>{{#link-to 'privacypolicy'}}Privacy Policy{{/link-to}}</li>
+        <li>{{#link-to 'termsofuse'}}Terms of use{{/link-to}}</li>
+      </ul>
+    </nav>
+
+    <nav class="main navbar-right">
+      <ul>
+        <li>{{#link-to 'index'}}Home{{/link-to}}</li>
+        <li>{{#link-to 'restaurants'}}Restaurants{{/link-to}}</li>
+        {{#unless currentUser.userLoggedIn}}
+          <li>{{#link-to 'login'}}Login{{/link-to}}</li>
+        {{/unless}}
+      </ul>
+    </nav>
+
+    <div class="copyright">Copyright © 2016 All rights reserved.</div>
+
+  </div>
+</footer>
+
+{{#restaurant-vote-popup vote="vote"}}{{/restaurant-vote-popup}}

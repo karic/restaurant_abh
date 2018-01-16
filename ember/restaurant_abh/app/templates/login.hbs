@@ -1,0 +1,29 @@
+{{#navigation-bar styleClass='navigation_black'}}{{/navigation-bar}}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-center-block login_register_container">
+      <h1 class="title">Login  {{#link-to 'register' class="register"}}Create account{{/link-to}}</h1>
+
+      <form data-toggle="validator">
+        <div class="form-group">
+          {{input type="email" class="form-control input_fields" value=email placeholder="Email"}}
+        </div>
+
+        <div class="form-group">
+          {{input type="password" class="form-control input_fields" value=password placeholder="Password"}}
+        </div>
+
+        <div class="form-group loginNotifications">
+          <div class="alert alert-danger" role="alert">
+            <div class="alertText"></div>
+          </div>
+        </div>
+
+        <div>{{input type="checkbox" checked=rememberMe}} <span class="remember_me">Remember Me</span>{{#link-to 'forgotpassword' class="register"}}Forgot password?{{/link-to}}</div>
+
+        <button {{action 'login'}} class="btn button">Login</button>
+      </form>
+     </div>
+  </div>
+</div>

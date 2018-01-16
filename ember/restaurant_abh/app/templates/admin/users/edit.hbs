@@ -1,0 +1,72 @@
+{{#admin-navigation-bar addOption=true navColumn=10 page='users'}}{{/admin-navigation-bar}}
+
+<div class="container" style="margin-top:30px;">
+  {{#admin-notification visible=notification.visible classStyle=notification.classStyle text=notification.text}}{{/admin-notification}}
+
+  <div class="box_shadow administration_fields column_same_height">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="input_title">First Name</label>
+          {{input type="text" class="form-control input_fields" placeholder="First Name" value=user.firstName}}
+        </div>
+
+        <div class="form-group">
+          <label class="input_title">Last Name</label>
+          {{input type="text" class="form-control input_fields" placeholder="Last Name"  value=user.lastName}}
+        </div>
+
+        <div class="form-group">
+          <label class="input_title">Email</label>
+          {{input type="text" class="form-control input_fields" placeholder="Email" value=user.email}}
+        </div>
+
+        <div class="form-group">
+          <label class="input_title">Phone Number</label>
+          {{input type="text" class="form-control input_fields" placeholder="Phone Number" value=user.phone}}
+        </div>
+
+        <div class="form-group" style="height:54px; overflow:visible;">
+          <div class="register_select_list_country_container">
+            <label class="input_title">Country</label>
+            {{ember-selectize
+              content=countries
+              value=user.country
+              placeholder="Select country"
+              select-item=(action 'changeCity')
+             }}
+          </div>
+          <div class="register_select_list_country_container">
+            <label class="input_title">City</label>
+            {{ember-selectize
+              content=cities
+              value=user.city
+              placeholder="Select city"
+             }}
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top:25px;">
+          <label class="input_title">Password</label>
+          {{input type="password" class="form-control input_fields" value=user.password placeholder="Password"}}
+        </div>
+        <div class="form-group">
+          <label class="input_title">Confirm Password</label>
+          {{input type="password" class="form-control input_fields" placeholder="Confirm Password" value=user.confirmPassword}}
+        </div>
+      </div>
+      <div class="col-md-6" style="padding-top:25px;">
+        <div class="buttons_container">
+          {{#if finished}}
+            <button {{action 'cancel'}} class="btn cancel_button pull-right">Back</button>
+          {{else}}
+            <button {{action 'editItem'}} class="btn button pull-right">Edit user</button>
+            <button {{action 'cancel'}} class="btn cancel_button pull-right">Cancel</button>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{outlet}}

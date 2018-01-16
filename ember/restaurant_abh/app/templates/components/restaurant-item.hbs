@@ -1,0 +1,10 @@
+<img class="restaurant_thumb" src="{{restaurantlist.imageFileName}}" width="298" height="258" />
+{{#link-to 'restaurant' restaurantlist.id class='restaurant_name'}}{{restaurantlist.restaurantName}}{{/link-to}}
+<div class="restaurant_marks">
+  {{#restaurant-star max=5 value=restaurantlist.mark votes=restaurantlist.votes voteAllowed=false}}{{/restaurant-star}}
+  <span class="price_range">
+    {{#restaurant-price-range max=5 value=restaurantlist.priceRange}}{{/restaurant-price-range}}
+  </span>
+</div>
+<div class="restaurant_food">{{restaurantlist.foodType}}</div>
+{{#link-to 'restaurant' restaurantlist.id class='restaurant_reserve'}}Reserve now{{/link-to}}

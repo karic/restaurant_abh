@@ -1,0 +1,11 @@
+{{#each priceRange as |dolarSign|}}
+  {{#if dolarSign.isFilled}}
+    <span class="active" {{action 'clickDolar' dolarSign.dolarNumber}}>$</span>
+  {{else}}
+    <span {{action 'clickDolar' dolarSign.dolarNumber}}>$</span>
+  {{/if}}
+{{/each}}
+
+{{#if priceActive}}
+  <span {{action 'removeDolar'}} class="glyphicon glyphicon-remove remove_filter_span" aria-hidden="true" style="color:#5F5F5F !important; font-size:12px; padding-left:5px; padding-top:10px;"></span>
+{{/if}}
