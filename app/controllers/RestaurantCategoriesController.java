@@ -39,19 +39,8 @@ public class RestaurantCategoriesController extends Controller {
 
     @Transactional
     public Result getAllCategories() {
-        //Declare list
-        RestaurantCategories restaurantCategory = new RestaurantCategories();
-        List<RestaurantCategories> restaurantCategories = restaurantCategory.getAll();
-
-        List<RestaurantCategories> tempRestaurantCategories = new ArrayList<RestaurantCategories>();
-        for(int i=0; i<=10; i++) {
-            if (restaurantCategories.get(i) != null) {
-                tempRestaurantCategories.add(restaurantCategories.get(i));
-            }
-        }
-
         //Return JSON of all restaurants
-        return ok(Json.toJson(tempRestaurantCategories));
+        return ok(Json.toJson(RestaurantCategories.getAll(10)));
     }
 
     @Transactional

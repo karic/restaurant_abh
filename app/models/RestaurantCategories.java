@@ -49,6 +49,12 @@ public class RestaurantCategories {
         return JPA.em().createQuery("SELECT u FROM RestaurantCategories u ORDER BY id ASC", RestaurantCategories.class).getResultList();
     }
 
+    public static List<RestaurantCategories> getAll(int limit) {
+        TypedQuery<RestaurantCategories> query = JPA.em().createQuery("SELECT u FROM RestaurantCategories u", RestaurantCategories.class);
+        query.setMaxResults(limit);
+        return query.getResultList();
+    }
+
     @Transactional
     public static RestaurantCategories findById(long id){
         try {
