@@ -36,7 +36,7 @@ sed -i 's/^[^#]b\.default\.password.*$/db.default.password="password"/gm' ./conf
 cat <<EOF >> ./conf/application.conf
 applyEvolutions.default=true
 pidfile.path=/var/run/activator/RUNNING_PID
-nproduction.application.mode=prod
+production.application.mode=prod
 EOF
 
 
