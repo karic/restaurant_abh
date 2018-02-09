@@ -12,6 +12,7 @@ sudo apt-get install -y postgresql
 echo "Installing postgis and postgresql-9.5-postgis-2.2"
 sudo apt-get install -y postgis postgresql-9.5-postgis-2.2 
 
+cd /vagrant
 
 echo "Running psql"
 echo "CREATE DATABASE restaurant_abh;"
@@ -34,6 +35,7 @@ sed -i 's/^[^#]b\.default\.user.*$/db.default.user=abh/gm' ./conf/application.co
 sed -i 's/^[^#]b\.default\.password.*$/db.default.password="password"/gm' ./conf/application.conf 
 
 cat <<EOF >> ./conf/application.conf
+
 applyEvolutions.default=true
 pidfile.path=/var/run/activator/RUNNING_PID
 production.application.mode=prod
@@ -44,13 +46,13 @@ EOF
 echo "Installing unzip and npm"
 sudo apt-get install -y unzip npm 
 
-if [ ! -d "/opt/activator/" ]; then
+if [ ! -d "/opt/play/" ]; then
 
-	echo "Making /opt/activator"
-	sudo mkdir /opt/activator
-	sudo chown vagrant /opt/activator
+	echo "Making /opt/play"
+	sudo mkdir /opt/play
+	sudo chown vagrant /opt/play
 	echo "Installing typesafe-activator"
-	cd /opt/activator
+	cd /opt/play
 	echo "Downloading activator"
 	wget http://downloads.typesafe.com/typesafe-activator/1.3.2/typesafe-activator-1.3.2-minimal.zip 
 	echo "Unziping activator"
@@ -60,7 +62,7 @@ if [ ! -d "/opt/activator/" ]; then
 	echo "Removing unnecessary files"
 	rm -rf typesafe-activator-1.3.2-minimal.zip 
 	echo "Adding activator to PATH and making it executable"
-	export PATH=$PATH:/opt/activator
+	export PATH=$PATH:/opt/play/activator
 	chmod +x `which activator/activator` 
 else 
 	echo "/opt/activator exists"
@@ -75,19 +77,19 @@ sudo npm install -g bower
 
 
 cd /vagrant/ember/restaurant_abh
+mkdir ~/node_modules/
+mkdir ./node_modules/
+sudo mount --bind ~/node_modules/ ./node_modules/
 echo "Installing project node modules"
-npm install 
+npm install -no-bin-links
 echo "Installing project bower components"
 bower install 
 
-cd /vagrant/restaurant_abh/
+cd /vagrant/
 echo "Running ember build script"
 ./build-ember.sh 
 
-#echo "Running intial activator"
-#activator run
-
-echo "Starting server"
+echo "Making binary for service to start"
 activator stage 
 
 cat <<EOF | sudo tee /etc/systemd/system/restaurant_abh.service
@@ -102,11 +104,15 @@ ExecStart="/vagrant/target/universal/stage/bin/restaurant_abh"
 WantedBy=multi-user.target
 EOF
 
+sudo mkdir /var/run/activator
+
+sudo chown vagrant /var/run/activator
+
+echo "d! /var/run/activator 744 vagrant vagrant - -" | sudo tee /etc/tmpfiles.d/activator.conf
 
 
 sudo systemctl daemon-reload
 sudo systemctl enable restaurant_abh.service
 sudo systemctl start restaurant_abh.service
 
-echo "d! /var/run/activator 744 vagrant vagrant - -" | sudo tee /var/run/tmpfiles.d/activator.conf
 
