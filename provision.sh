@@ -1,5 +1,11 @@
 set -e
 
+
+#Insecure write your own script here
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+
 echo "Updating and upgrading the system"
 sudo apt-get update -y  
 sudo apt-get upgrade -y 
@@ -16,18 +22,22 @@ cd /vagrant
 
 echo "Running psql"
 echo "CREATE DATABASE restaurant_abh;"
+if sudo -u postgres psql -lqt | cut -d \| -f 1 | grep -qw restaurant_abh; then
+    echo "DB already exists"
+else
 sudo -u postgres psql -c "CREATE DATABASE restaurant_abh;" 
+fi
+
 echo "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;"
-sudo -u postgres psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" restaurant_abh 
+sudo -u postgres psql -c "CREATE EXTENSION IF NOT EXISTS postgis; CREATE EXTENSION IF NOT EXISTS  postgis_topology;" restaurant_abh 
+
 echo "Createuser abh"
-sudo -u postgres createuser abh 
+sudo -u postgres psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='abh'" | grep -q 1 || sudo -u postgres createuser abh
 echo "Change abh user password"
 sudo -u postgres psql -c "alter user abh with encrypted password 'password';"  
 echo "Grant abh user privileges on the restaurant_abh database"
 sudo -u postgres psql -c "grant all privileges on database restaurant_abh to abh; " 
-#set -e stops the script here check for user and DB first database extension and role already exists
 
-cd /vagrant
 echo "Set ./conf/application.conf"
 sed -i 's/^[^#]b\.default\.driver.*$/db.default.driver=org.postgresql.Driver/gm' ./conf/application.conf 
 sed -i 's/^[^#]b\.default\.url.*$/db.default.url="jdbc:postgresql:\/\/127.0.0.1:5432\/restaurant_abh"/gm' ./conf/application.conf 
@@ -44,7 +54,8 @@ EOF
 
 
 echo "Installing unzip and npm"
-sudo apt-get install -y unzip npm 
+sudo apt-get install -y unzip 
+#sudo apt-get install -y npm  
 
 if [ ! -d "/opt/play/" ]; then
 
@@ -68,20 +79,34 @@ else
 	echo "/opt/activator exists"
 fi
 
+#Configuring 
+#export NODE_PATH=~/node_modules
+#echo  'NODE_PATH=~/node_modules' | sudo tee /etc/environment
 cd /vagrant
 echo "Adding alias node to nodejs"
-sudo ln -s `which nodejs` /usr/bin/node 
+if [ ! f /usr/bin/node]; then
+        sudo ln -s `which nodejs` /usr/bin/node 
+fi
 echo "Installing ember-cli and bower with npm"
 sudo npm install -g ember-cli 
 sudo npm install -g bower 
 
 
 cd /vagrant/ember/restaurant_abh
-mkdir ~/node_modules/
-mkdir ./node_modules/
-sudo mount --bind ~/node_modules/ ./node_modules/
 echo "Installing project node modules"
-npm install -no-bin-links
+mkdir -p ~/rabh/
+cp -i package.json ~/rabh/
+cd ~/rabh/
+npm install
+mkdir -p /vagrant/ember/restaurant_abh/node_modules/
+sudo mount --bind ~/rabh/node_modules/ /vagrant/ember/restaurant_abh/node_modules/
+
+
+
+#mkdir ./node_modules/
+#sudo mount --bind ~/node_modules/ ./node_modules/
+#npm install -no-bin-links
+cd /vagrant/ember/restaurant_abh
 echo "Installing project bower components"
 bower install 
 
