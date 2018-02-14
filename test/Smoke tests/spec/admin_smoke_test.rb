@@ -2,10 +2,12 @@ require './spec_helper'
 
 email = "irfankr91@gmail.com"
 password = "12345"
-restaurant_name= "Baja Fresh"
-how_many_people= "6 people"
-people="6"
-hour= "07:00 PM"
+restaurant_name= "Restoran test"
+price_range= "Rank 3"
+new_price_range= "Rank 4"
+category= "American"
+location= "New York"
+description= "Restoran test is newly opened restaurant in New York serving typical American couisine."
 
 describe "Administration of restaurant" do
 
@@ -43,12 +45,12 @@ context "Navigate to Restaurants" do
     end
   end
 
-context "Click on add restaurants button" do
-    it "navigate and opened Restaurants page sucessfully" do
-      add_restaurants= admin.click_on_add_restaurants_button
-      expect(add_restaurants).to match(/add restaurant/i)
-    end
-  end
+#context "Click on add restaurants button" do
+ #   it "navigate and opened Restaurants page sucessfully" do
+  #    add_restaurants= admin.click_on_add_restaurants_button
+   #   expect(add_restaurants).to match(/add restaurant/i)
+   # end
+  #end
 
 context "Edit desired restaurant " do
     it "open edit form for restaurant" do
@@ -56,6 +58,15 @@ context "Edit desired restaurant " do
       expect(edit_restaurants).to match(/save info/i)
     end
   end
+
+  context "Edit desired restaurant with new price range " do
+    it "edit restaurant with new price range value" do
+      edit_restaurants= admin.edit_new_restaurant_price_range(new_price_range)
+      expect(edit_restaurants).to match(/successful update/i)
+    end
+  end
+
+
 
 #context "Fill in valid restaurant name, description, price range, location, category and click add restaurant" do
  #   it "Add restaurant form fill and new restaurant added sucessfully" do

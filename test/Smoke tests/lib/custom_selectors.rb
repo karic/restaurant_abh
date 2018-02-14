@@ -49,6 +49,6 @@ Capybara.add_selector(:add_restaurants_form_area) do
 end
 
 Capybara.add_selector(:restaurants_table_area) do
-  xpath { "//div[@class=\"table table-bordered table-hover box_shadow administration_table\"]" }
+  xpath { "//table[@class=\"table table-bordered table-hover box_shadow administration_table\"]" }
 end
 
