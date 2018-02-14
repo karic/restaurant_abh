@@ -6,7 +6,7 @@ email = "berina.avdicaa@gmail.com"
 password = "restoran"
 phone= "061546765"
 country= "Serbia"
-city= "Beograd"
+city= "Belgrade"
 
 describe "Registration of a user" do
 

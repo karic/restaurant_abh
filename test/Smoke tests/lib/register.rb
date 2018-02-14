@@ -24,26 +24,24 @@ def fill_in_phone (phone)
     end
   end
 
-  def select_country(country)
+  def select_country(acountry)
     @session.within(:register_area) do
     country= @session.driver.browser.find_element(:xpath,"//input[contains(@placeholder,'Select country')]")
     country= country.find_element(:xpath,"..");
     country= country.find_element(:xpath,"..");
     country.click
-    #radi sa unosom 'Bosnia and Herzegovina', ali ne i sa varijablom country?!?
-    require 'byebug' ; byebug
-    country= country.find_element(:xpath,"//div[contains(@data-value,'#{country}')]").click
+    country= country.find_element(:xpath,"//div[contains(@data-value,'#{acountry}')]").click
     end
   end
 
-  def select_city(city)
+  def select_city(acity)
     @session.within(:register_area) do
     city= @session.driver.browser.find_element(:xpath,"//input[contains(@placeholder,'Select city')]")
     city= city.find_element(:xpath,"..");
     city= city.find_element(:xpath,"..");
     city.click
     #radi sa unosom 'Sarajevo', ali ne i sa varijablom city?!?
-    city= city.find_element(:xpath,"//div[contains(@data-value,'#{city}')]").click
+    city= city.find_element(:xpath,"//div[contains(@data-value,'#{acity}')]").click
     end
   end
 
