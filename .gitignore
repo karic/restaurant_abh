@@ -40,3 +40,5 @@ server.pid
 .vagrant
 *.log
 
+
+test/Smoke tests/.byebug_history

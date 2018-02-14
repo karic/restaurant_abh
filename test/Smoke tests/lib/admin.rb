@@ -26,9 +26,8 @@ def edit_new_restaurant_price_range(new_price_range)
     price_r= price_r.find_element(:xpath,"..");
     price_r.click
     @session.driver.browser.find_element(:xpath,"//div[contains(text(),'#{new_price_range}')]").click
-    @session.driver.browser.find_element(:css,"div.buttons_container > button").click  
-    @session.driver.browser.find_element(:css,"div.a.alert").text
-    sleep(1)
+    @session.driver.browser.find_element(:css,"div.buttons_container > button").click 
+    array= @session.driver.browser.find_element(:xpath,"//div[@class=\"alert alert-success\"]").text.split(/\n/)[1]
     
   end
 end
