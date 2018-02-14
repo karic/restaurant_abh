@@ -1,5 +1,0 @@
-environment:
-  url: http://ec2-18-196-126-23.eu-central-1.compute.amazonaws.com:9000/
-  platform: web
-  web:
-    driver: chrome
