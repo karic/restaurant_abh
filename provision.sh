@@ -52,13 +52,11 @@ production.application.mode=prod
 EOF
 
 
-
 echo "Installing unzip and npm"
 sudo apt-get install -y unzip 
 #sudo apt-get install -y npm  
 
 if [ ! -d "/opt/play/" ]; then
-
 	echo "Making /opt/play"
 	sudo mkdir /opt/play
 	sudo chown vagrant /opt/play
@@ -77,16 +75,13 @@ if [ ! -d "/opt/play/" ]; then
 	chmod +x `which activator/activator` 
 else 
 	echo "/opt/activator exists"
+	cd /opt/play
+	export PATH=$PATH:/opt/play/activator
 fi
 
-#Configuring 
-#export NODE_PATH=~/node_modules
-#echo  'NODE_PATH=~/node_modules' | sudo tee /etc/environment
 cd /vagrant
 echo "Adding alias node to nodejs"
-if [ ! f /usr/bin/node]; then
-        sudo ln -s `which nodejs` /usr/bin/node 
-fi
+sudo ln -sf `which nodejs` /usr/bin/node 
 echo "Installing ember-cli and bower with npm"
 sudo npm install -g ember-cli 
 sudo npm install -g bower 
@@ -95,12 +90,15 @@ sudo npm install -g bower
 cd /vagrant/ember/restaurant_abh
 echo "Installing project node modules"
 mkdir -p ~/rabh/
-cp -i package.json ~/rabh/
+cp package.json ~/rabh/
 cd ~/rabh/
+
+sudo chown -R $USER:$(id -gn $USER) /home/vagrant/.config
 npm install
 mkdir -p /vagrant/ember/restaurant_abh/node_modules/
 sudo mount --bind ~/rabh/node_modules/ /vagrant/ember/restaurant_abh/node_modules/
 
+echo "/home/vagrant/rabh/node_modules /vagrant/ember/restaurant_abh/node_modles none defaults,bind 0 0" | sudo tee -a /etc/fstab
 
 
 #mkdir ./node_modules/
@@ -129,15 +127,12 @@ ExecStart="/vagrant/target/universal/stage/bin/restaurant_abh"
 WantedBy=multi-user.target
 EOF
 
-sudo mkdir /var/run/activator
+sudo mkdir -p /var/run/activator
 
 sudo chown vagrant /var/run/activator
 
 echo "d! /var/run/activator 744 vagrant vagrant - -" | sudo tee /etc/tmpfiles.d/activator.conf
 
-
 sudo systemctl daemon-reload
 sudo systemctl enable restaurant_abh.service
 sudo systemctl start restaurant_abh.service
-
-
