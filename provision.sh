@@ -122,6 +122,8 @@ Description=Restaurant_abh server
 [Service]
 User=vagrant
 ExecStart="/vagrant/target/universal/stage/bin/restaurant_abh"
+Restart=always
+RestartSec=3
 
 [Install]
 WantedBy=multi-user.target
