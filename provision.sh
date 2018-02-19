@@ -1,5 +1,5 @@
 set -e
-
+set -x
 
 #Insecure write your own script here
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
@@ -81,7 +81,9 @@ fi
 
 cd /vagrant
 echo "Adding alias node to nodejs"
-sudo ln -sf `which nodejs` /usr/bin/node 
+if [ ! -f "/usr/bin/node" ]; then
+    sudo ln -sf `which nodejs` /usr/bin/node 
+fi
 echo "Installing ember-cli and bower with npm"
 sudo npm install -g ember-cli 
 sudo npm install -g bower 
