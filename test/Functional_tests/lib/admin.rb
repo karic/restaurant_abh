@@ -127,7 +127,8 @@ def edit_existing_table(sitting_places, new_sitting_places)
     sit_places= sit_places.find_element(:xpath,"..");    
     sit_places= sit_places.find_element(:xpath,"//span[@class=\"glyphicon glyphicon-pencil\"]").click
     @session.driver.browser.find_element(:xpath,"//div[@class='row administration_menu_table_div_row']//div[@class='col-md-4']").click
-    @session.driver.browser.find_element(:xpath,"//div[@class='col-md-4']//input[@class='form-control input_fields ember-view ember-text-field']").send_keys("\b"+"#{new_sitting_places}")
+    @session.driver.browser.find_element(:xpath,"//div[@class='col-md-4']//input[@class='form-control input_fields ember-view ember-text-field']").clear    
+    @session.driver.browser.find_element(:xpath,"//div[@class='col-md-4']//input[@class='form-control input_fields ember-view ember-text-field']").send_keys("#{new_sitting_places}")
     @session.driver.browser.find_element(:xpath,"//button[@class=\"admin_menu_buttons_add\"]").click
     edited= @session.driver.browser.find_element(:xpath,"//div[@class='box_shadow administration_fields']//strong[text()='#{new_sitting_places}']") ? "Sucessfully edited": "Not sucessfully edited"
     end
