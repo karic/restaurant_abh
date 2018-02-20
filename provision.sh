@@ -106,7 +106,7 @@ cd ~/rabh/
 sudo chown -R $USER:$(id -gn $USER) /home/vagrant/.config
 rm -rf ~/rabh/node_modules
 npm install
-sudo umount /vagrant/ember/restaurant_abh/node_modules/
+sudo umount -f /vagrant/ember/restaurant_abh/node_modules/ || /bin/true
 rm -rf /vagrant/ember/restaurant_abh/node_modules/
 mkdir -p /vagrant/ember/restaurant_abh/node_modules/
 sudo mount --bind ~/rabh/node_modules/ /vagrant/ember/restaurant_abh/node_modules/
@@ -162,7 +162,7 @@ cd /vagrant/test/Functional_tests
 
 bundle install
 
-if [ ! -f /opt/gecko/geckodriver]; then
+if [ ! -f /opt/gecko/geckodriver ]; then
     cd /vagrant
     wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
     tar -xvf geckodriver-v0.19.1-linux64.tar.gz
