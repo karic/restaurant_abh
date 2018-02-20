@@ -7,7 +7,7 @@ restaurant_name= "Restoran test"
 price_range= "Rank 3"
 new_price_range= "Rank 4"
 category= "American"
-location= "New York"
+location= "Chicago"
 description= "Restoran test is newly opened restaurant in New York serving typical American couisine."
 menu_name= "Frittata" 
 new_menu_name= "Frittata vege"
@@ -173,7 +173,6 @@ context "Delete desired restaurant " do
 
 context "Click on logout from first name dropwon " do
   it "user logged out successfully" do
-    require 'byebug' ; byebug
     logout= main.click_on_logout
     expect(logout).to match(/login/i)
   end
