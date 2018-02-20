@@ -140,3 +140,13 @@ echo "d! /var/run/activator 744 vagrant vagrant - -" | sudo tee /etc/tmpfiles.d/
 sudo systemctl daemon-reload
 sudo systemctl enable restaurant_abh.service
 sudo systemctl start restaurant_abh.service
+
+
+#Preparing test suite
+sudo apt install ruby2.3 firefox xvfb ruby2.3-dev postgresql-server-dev-all
+
+sudo gem2.3 install bundler
+
+cd /vagrant/tests/Functional_tests
+
+bundle install
