@@ -43,3 +43,5 @@ server.pid
 
 .byebug_history
 *.sublime-workspace
+.idea
+.sbtserver
