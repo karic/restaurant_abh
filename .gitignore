@@ -41,4 +41,4 @@ server.pid
 *.log
 
 
-test/Smoke tests/.byebug_history
+.byebug_history
