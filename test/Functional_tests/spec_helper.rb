@@ -31,6 +31,7 @@ RSpec.configure do |config|
       puts "Quitting browser session..."
       setup.web['driver'] == 'chrome' ? @homepage.close : @homepage.quit
       sleep 2
+      headless.destroy
     end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
