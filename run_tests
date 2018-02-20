@@ -1,1 +1,1 @@
-vagrant ssh --command "./test/run_tests.sh"
+vagrant ssh --command "/vagrant/test/Functional_tests/run_tests.sh"

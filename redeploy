@@ -1,1 +1,1 @@
-vagrant ssh --command './v_reb.sh'
+vagrant ssh --command '/vagrant/v_reb.sh'

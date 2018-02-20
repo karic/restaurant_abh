@@ -1,5 +1,4 @@
-set -e
-set -x
+set -e set -x
 
 #Insecure write your own script here
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
@@ -105,7 +104,10 @@ cp package.json ~/rabh/
 cd ~/rabh/
 
 sudo chown -R $USER:$(id -gn $USER) /home/vagrant/.config
+rm -rf ~/rabh/node_modules
 npm install
+sudo umount /vagrant/ember/restaurant_abh/node_modules/
+rm -rf /vagrant/ember/restaurant_abh/node_modules/
 mkdir -p /vagrant/ember/restaurant_abh/node_modules/
 sudo mount --bind ~/rabh/node_modules/ /vagrant/ember/restaurant_abh/node_modules/
 
@@ -152,11 +154,11 @@ sudo systemctl start restaurant_abh.service
 
 
 #Preparing test suite
-sudo apt install ruby2.3 firefox xvfb ruby2.3-dev postgresql-server-dev-all 
+sudo apt install -y ruby2.3 firefox xvfb ruby2.3-dev postgresql-server-dev-all libpqxx-dev
 
 sudo gem2.3 install bundler
 
-cd /vagrant/tests/Functional_tests
+cd /vagrant/test/Functional_tests
 
 bundle install
 
