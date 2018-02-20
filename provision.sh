@@ -1,5 +1,5 @@
 set -e
-
+set -x
 
 #Insecure write your own script here
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
@@ -81,7 +81,9 @@ fi
 
 cd /vagrant
 echo "Adding alias node to nodejs"
-sudo ln -sf `which nodejs` /usr/bin/node 
+if [ ! -f "/usr/bin/node" ]; then
+    sudo ln -sf `which nodejs` /usr/bin/node 
+fi
 echo "Installing ember-cli and bower with npm"
 sudo npm install -g ember-cli 
 sudo npm install -g bower 
@@ -122,6 +124,8 @@ Description=Restaurant_abh server
 [Service]
 User=vagrant
 ExecStart="/vagrant/target/universal/stage/bin/restaurant_abh"
+Restart=always
+RestartSec=60
 
 [Install]
 WantedBy=multi-user.target
@@ -136,3 +140,13 @@ echo "d! /var/run/activator 744 vagrant vagrant - -" | sudo tee /etc/tmpfiles.d/
 sudo systemctl daemon-reload
 sudo systemctl enable restaurant_abh.service
 sudo systemctl start restaurant_abh.service
+
+
+#Preparing test suite
+sudo apt install ruby2.3 firefox xvfb ruby2.3-dev postgresql-server-dev-all
+
+sudo gem2.3 install bundler
+
+cd /vagrant/tests/Functional_tests
+
+bundle install
