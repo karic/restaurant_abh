@@ -160,7 +160,7 @@ cd /vagrant/tests/Functional_tests
 
 bundle install
 
-if [ !f /opt/gecko/geckodriver]; then
+if [ ! -f /opt/gecko/geckodriver]; then
     cd /vagrant
     wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
     tar -xvf geckodriver-v0.19.1-linux64.tar.gz
