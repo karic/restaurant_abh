@@ -1,1 +1,1 @@
-rspec Functional_tests/spec/*
+bundle exec rspec Functional_tests/spec/*

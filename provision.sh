@@ -59,7 +59,7 @@ sudo apt-get install -y unzip
 if [ ! -d "/opt/play/" ]; then
 	echo "Making /opt/play"
 	sudo mkdir /opt/play
-	sudo chown vagrant /opt/play
+	sudo chown vagrant:vagrant /opt/play
 	echo "Installing typesafe-activator"
 	cd /opt/play
 	echo "Downloading activator"
@@ -73,10 +73,19 @@ if [ ! -d "/opt/play/" ]; then
 	echo "Adding activator to PATH and making it executable"
 	export PATH=$PATH:/opt/play/activator
 	chmod +x `which activator/activator` 
+    cat <<EOF >> sudo tee /etc/profile.d/10-activator.sh
+    #!/bin/sh
+    export PATH=$PATH:/opt/play/activator
+EOF
+
 else 
 	echo "/opt/activator exists"
 	cd /opt/play
 	export PATH=$PATH:/opt/play/activator
+    cat <<EOF >> sudo tee /etc/profile.d/10-activator.sh
+    #!/bin/sh
+    export PATH=$PATH:/opt/play/activator
+EOF
 fi
 
 cd /vagrant
@@ -143,10 +152,25 @@ sudo systemctl start restaurant_abh.service
 
 
 #Preparing test suite
-sudo apt install ruby2.3 firefox xvfb ruby2.3-dev postgresql-server-dev-all
+sudo apt install ruby2.3 firefox xvfb ruby2.3-dev postgresql-server-dev-all 
 
 sudo gem2.3 install bundler
 
 cd /vagrant/tests/Functional_tests
 
 bundle install
+
+if [ ! -f /opt/gecko/geckodriver]; then
+    cd /vagrant
+    wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
+    tar -xvf geckodriver-v0.19.1-linux64.tar.gz
+    rm -rf geckodriver-v0.19.1-linux64.tar.gz
+    sudo mkdir -p /opt/gecko
+    sudo chown vagrant:vagrant /opt/gecko
+    mv geckodriver /opt/gecko
+    export PATH=$PATH:/opt/gecko
+    cat <<EOF >> sudo tee /etc/profile.d/10-geckodriver.sh
+    #!/bin/sh
+    export PATH=$PATH:/opt/gecko
+EOF
+fi
