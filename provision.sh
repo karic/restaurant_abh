@@ -73,7 +73,7 @@ if [ ! -d "/opt/play/" ]; then
 	echo "Adding activator to PATH and making it executable"
 	export PATH=$PATH:/opt/play/activator
 	chmod +x `which activator/activator` 
-    cat <<EOF >> sudo tee /etc/profile.d/10-activator.sh
+    cat <<EOF | sudo tee /etc/profile.d/10-activator.sh
     #!/bin/sh
     export PATH=$PATH:/opt/play/activator
 EOF
@@ -82,7 +82,7 @@ else
 	echo "/opt/activator exists"
 	cd /opt/play
 	export PATH=$PATH:/opt/play/activator
-    cat <<EOF >> sudo tee /etc/profile.d/10-activator.sh
+    cat <<EOF | sudo tee /etc/profile.d/10-activator.sh
     #!/bin/sh
     export PATH=$PATH:/opt/play/activator
 EOF
@@ -169,7 +169,7 @@ if [ ! -f /opt/gecko/geckodriver]; then
     sudo chown vagrant:vagrant /opt/gecko
     mv geckodriver /opt/gecko
     export PATH=$PATH:/opt/gecko
-    cat <<EOF >> sudo tee /etc/profile.d/10-geckodriver.sh
+    cat <<EOF | sudo tee /etc/profile.d/10-geckodriver.sh
     #!/bin/sh
     export PATH=$PATH:/opt/gecko
 EOF
