@@ -2,11 +2,11 @@ require './spec_helper'
 
 first_name= "Berina"
 last_name= "Avdic"
-email = "berina.avdicaa@gmail.com"
+email = "berina.avdicvx@gmail.com"
 password = "restoran"
 phone= "061546765"
-country= "Serbia"
-city= "Belgrade"
+country= "Bosnia and Herzegovina"
+city= "Sarajevo"
 
 describe "Registration of a user" do
 

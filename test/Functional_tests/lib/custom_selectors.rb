@@ -52,3 +52,10 @@ Capybara.add_selector(:restaurants_table_area) do
   xpath { "//table[@class=\"table table-bordered table-hover box_shadow administration_table\"]" }
 end
 
+Capybara.add_selector(:edit_restaurants_navigation_area) do
+  xpath { "//ul[@class=\"nav nav-tabs admin_restaurants_add_tabls_container\"]" }
+end
+
+Capybara.add_selector(:restaurant_tab_area) do
+  xpath { "//div[@class=\"box_shadow administration_fields\"]" }
+end

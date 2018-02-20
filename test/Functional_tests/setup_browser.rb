@@ -4,6 +4,7 @@ require 'capybara/rspec'
 require "chromedriver/helper"
 require 'require_all'
 require 'rspec/retry'
+require 'headless'
 require_all './lib/'
 
 class SetupBrowser

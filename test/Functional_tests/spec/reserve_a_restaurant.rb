@@ -2,9 +2,9 @@ require './spec_helper'
 
 email = "berina.avdic@outlook.com"
 password = "restoran"
-restaurant_name= "Baja Fresh"
+restaurant_name= "Tassili Raw"
 how_many_people= "6 people"
-people="6"
+people= how_many_people.split.first
 hour= "07:00 PM"
 describe "Reservation of restaurant table" do
 
@@ -55,29 +55,29 @@ context "Select time slot and complete reservtion" do
 
 context "Click on complete reservation button" do
    it "complete reservation successfully" do
-   complete_reservations= reserve.click_on_complete_reservation_button
-   expect(complete_reservations).to match(/reservation is successfull/i)
+     complete_reservations= reserve.click_on_complete_reservation_button
+     expect(complete_reservations).to match(/reservation is successfull/i)
     end
   end
 
 context "Click on reservations from first name dropwon " do
    it "reservations listed successfully" do
-   reservations= main.click_on_reservations_link
-   expect(reservations).to match(/reservation details/i)
+     reservations= main.click_on_reservations_link
+     expect(reservations).to match(/reservation details/i)
     end
   end
 
 context "Click on cancel reservations from first name dropwon " do
    it "reservations canceled successfully" do
-   cancel_reservation= reserve.click_on_cancel_reservation_button(restaurant_name, people)
-   expect(cancel_reservation).to match(/reservation canceled/i)
+     cancel_reservation= reserve.click_on_cancel_reservation_button(restaurant_name, people)
+     expect(cancel_reservation).to match(/reservation canceled/i)
     end
   end
   
 context "Click on logout from first name dropwon " do
    it "user logged out successfully" do
-   logout= main.click_on_logout
-   expect(logout).to match(/login/i)
+     logout= main.click_on_logout
+     expect(logout).to match(/login/i)
     end
   end
 

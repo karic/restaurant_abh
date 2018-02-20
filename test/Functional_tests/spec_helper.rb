@@ -29,7 +29,7 @@ RSpec.configure do |config|
 
   config.after(:all) do
       puts "Quitting browser session..."
-      setup.web['driver'] == 'firefox' ? @homepage.close : @homepage.quit
+      setup.web['driver'] == 'chrome' ? @homepage.close : @homepage.quit
       sleep 2
     end
   # rspec-expectations config goes here. You can use an alternate
