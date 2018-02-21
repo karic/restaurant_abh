@@ -23,8 +23,10 @@ RSpec.configure do |config|
   setup = SetupBrowser.new
 
   config.before(:all) do
-    @headless = Headless.new
-    @headless.start
+      if @isHeadless then
+        @headless = Headless.new
+        @headless.start
+      end
     puts "Loading session..."
       @homepage = setup.load_browser
   end
@@ -33,7 +35,9 @@ RSpec.configure do |config|
       puts "Quitting browser session..."
       setup.web['driver'] == 'firefox' ? @homepage.close : @homepage.quit
       sleep 2
-      @headless.destroy
+      if @isHeadless then
+        @headless.destroy
+        end
     end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
