@@ -23,6 +23,8 @@ RSpec.configure do |config|
   setup = SetupBrowser.new
 
   config.before(:all) do
+    @headless = Headless.new
+    @headless.start
     puts "Loading session..."
       @homepage = setup.load_browser
   end

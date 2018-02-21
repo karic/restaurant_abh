@@ -1,8 +1,8 @@
 require './spec_helper'
-require 'clipboard'
 
 email = "irfankr91@gmail.com"
 password = "12345"
+user_email="berina.avdicvx@gmail.com"
 restaurant_name= "Restoran test"
 price_range= "Rank 3"
 new_price_range= "Rank 4"
@@ -171,8 +171,24 @@ context "Delete desired restaurant " do
     end
   end
 
+context "Click on tab Users" do
+  it "selected user is deleted" do
+    users= admin.click_on_administration_users
+    expect(users).to match(/add users/i)
+  end
+end
+
+context "Delete desired user " do
+    it "desired user is deleted" do
+      admin.click_on_administration_users
+      delete_users= admin.click_on_delete_existing_user(user_email)
+      expect(delete_users).to match(/successful remove/i)
+    end
+  end
+
 context "Click on logout from first name dropwon " do
   it "user logged out successfully" do
+    main.click_on_navigation_home
     logout= main.click_on_logout
     expect(logout).to match(/login/i)
   end

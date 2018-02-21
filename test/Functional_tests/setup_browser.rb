@@ -41,8 +41,7 @@ class SetupBrowser
     Capybara.default_driver = browser.to_sym
 
     # Start Capybara session
-    @headless = Headless.new
-    @headless.start
+    
     @session = Capybara::Session.new(browser.to_sym)
     @homepage = HomePage.new(@session)
 

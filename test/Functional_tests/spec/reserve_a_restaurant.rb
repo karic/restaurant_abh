@@ -2,10 +2,10 @@ require './spec_helper'
 
 email = "berina.avdic@outlook.com"
 password = "restoran"
-restaurant_name= "Tassili Raw"
+restaurant_name= "Sufis"
 how_many_people= "6 people"
 people= how_many_people.split.first
-hour= "07:00 PM"
+hour= "02:30 PM"
 describe "Reservation of restaurant table" do
 
 let(:main) { @homepage.get_main }
