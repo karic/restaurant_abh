@@ -1,1 +1,2 @@
-bundle exec rspec Functional_tests/spec/*
+cd /vagrant/test/Functional_tests
+bundle exec rspec spec/*
