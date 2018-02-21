@@ -188,7 +188,6 @@ context "Delete desired user " do
 
 context "Click on logout from first name dropwon " do
   it "user logged out successfully" do
-    main.click_on_navigation_home
     logout= main.click_on_logout
     expect(logout).to match(/login/i)
   end
