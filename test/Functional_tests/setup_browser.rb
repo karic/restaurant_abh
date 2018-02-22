@@ -17,7 +17,7 @@ class SetupBrowser
     self.url       = config['url']
     self.retry     = config['retry']
     self.fast_fail = config['fast_fail']
-    @isHeadless    = config['headless']
+    self.headless  = config['headless']
     Capybara.default_selector = :xpath
     Capybara.default_max_wait_time = 30
   end

@@ -1,11 +1,11 @@
 require './spec_helper'
 
-email = "irfankr91@gmail.com"
-password = "12345"
+email = "berina.avdicvx@gmail.com"
+password = "restoran"
 restaurant_name= "Sufis"
 how_many_people= "6 people"
 people= how_many_people.split.first
-hour= "02:30 PM"
+hour= "07:00 PM"
 describe "Reservation of restaurant table" do
 
 let(:main) { @homepage.get_main }
@@ -67,7 +67,7 @@ context "Click on reservations from first name dropwon " do
     end
   end
 
-context "Click on cancel reservations from first name dropwon " do
+context "Click on cancel reservations" do
    it "reservations canceled successfully" do
      cancel_reservation= reserve.click_on_cancel_reservation_button(restaurant_name, people)
      expect(cancel_reservation).to match(/reservation canceled/i)
