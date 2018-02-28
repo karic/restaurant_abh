@@ -24,6 +24,7 @@ file { "/etc/postgresql/9.5/main/postgresql.conf":
         ensure  => "present",
         content =>  template('/vagrant/puppet/templates/postgresql.conf.erb') ,
         notify => Service['postgresql@9.5-main.service'],
+        require =>  Package[$packages],
 }
 }
 
