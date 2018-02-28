@@ -4,5 +4,10 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "2048"
   end
-  config.vm.provision "shell", privileged: false,  path: "provision.sh"
+  #config.vm.provision "shell", privileged: false,  path: "provision.sh"
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file = "default.pp"
+  end
+
 end
