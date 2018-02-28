@@ -1,4 +1,3 @@
-$IPs = '*'
 exec { 'apt-get update':
     command => '/usr/bin/apt-get update -y'
 }
@@ -12,7 +11,7 @@ package { $packages:
    ensure => "installed",
 }
 
-class pgql {
+class pgql ($listen_address = 'localhost'){
 notify { 'Pozvan pgql':
 }
 service { 'postgresql@9.5-main.service':
@@ -29,4 +28,6 @@ file { "/etc/postgresql/9.5/main/postgresql.conf":
 }
 
 
-class {'pgql':}
+class {'pgql':
+  listen_address => '127.0.0.1'
+}
