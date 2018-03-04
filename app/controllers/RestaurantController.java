@@ -393,15 +393,18 @@ public class RestaurantController extends Controller {
 
             BigInteger temp1 = (BigInteger)col[0];
             location = location.findById(temp1.longValue());
-            restaurantLocation.setLocation(location.getName());
+
+            if (location != null) {
+                restaurantLocation.setLocation(location.getName());
 
 
-            BigInteger temp2 = (BigInteger)col[1];
-            restaurantLocation.setNumber(temp2.longValue());
+                BigInteger temp2 = (BigInteger)col[1];
+                restaurantLocation.setNumber(temp2.longValue());
 
-            restaurantLocation.setId(temp1.longValue());
+                restaurantLocation.setId(temp1.longValue());
 
-            restaurantsLocations.add(restaurantLocation);
+                restaurantsLocations.add(restaurantLocation);
+            }
         }
 
         return ok(Json.toJson(restaurantsLocations));
@@ -618,7 +621,7 @@ public class RestaurantController extends Controller {
         }
 
         //Return JSON of all restaurants
-        return ok(Json.toJson(outputComments.get(comments.size() - 1)));
+        return ok(Json.toJson(outputComments));
     }
 
     @Transactional
@@ -710,7 +713,6 @@ public class RestaurantController extends Controller {
     }
 
     @Transactional
-    @Security.Authenticated(ActionAuthenticator.class)
     public Result getFilteredRestaurants() {
         Form<Restaurant.RestaurantsFilterDto> inputForm = form(Restaurant.RestaurantsFilterDto.class).bindFromRequest();
 

@@ -13,7 +13,7 @@ export default Ember.Component.extend({
         this.get('ajax').ajaxRequest("/api/v1/logout/" + token, "GET").fail(function(data) {
           console.log(data);
         }).done(function(data) {
-          window.location.reload();
+          window.location = "/";
         });
       }
     }

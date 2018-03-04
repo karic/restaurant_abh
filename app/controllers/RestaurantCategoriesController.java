@@ -141,6 +141,8 @@ public class RestaurantCategoriesController extends Controller {
         RestaurantCategories category = new RestaurantCategories();
         category = category.findById(categoryForm.get().id);
 
+        category.delete();
+
         return ok();
     }
 
