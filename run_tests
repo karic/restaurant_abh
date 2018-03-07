@@ -1,1 +1,1 @@
-vagrant ssh --command "/vagrant/test/Functional_tests/run_tests.sh"
+vagrant ssh --command "export PATH=/opt/gecko:$PATH && /vagrant/test/Functional_tests/run_tests.sh"
