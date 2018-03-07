@@ -30,6 +30,11 @@ Capybara.add_selector(:cancel_reservation_area) do
   xpath { "//div[@class=\"box_shadow restaurant_data_container\"]" }
 end
 
+Capybara.add_selector(:reserve_now_area) do
+  xpath { "//div[@class=\"ember-view restaurantbox\"]" }
+end
+
+
 # admin
 
 Capybara.add_selector(:admin_navigation_area) do
