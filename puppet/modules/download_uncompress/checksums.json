@@ -1,0 +1,15 @@
+{
+  "CHANGELOG.md": "7919908cc11420e6f580da927bd976a3",
+  "LICENSE": "1ffe3abb84c3e2a534bdb14d7d55bfa1",
+  "README.markdown": "51c5c6e21de95561a86b012a707def99",
+  "Rakefile": "50b53fca271ad0f0253fe61e55dfc3f4",
+  "download_uncompress.iml": "fa2c8cc9a5520131ea9e8ad2dd0c7f24",
+  "manifests/dependencies.pp": "398479500b22bcf8e4f82e5e4a33a06c",
+  "manifests/init.pp": "9aa14ff4a97fd29571d24b54345fb156",
+  "metadata.json": "cfede11f8a71b00f342dc55ad998b6f6",
+  "spec/defines/download_uncompress_spec.rb": "68070b78ca592afcfdbdde558dd5e983",
+  "spec/fixtures/manifests/site.pp": "d41d8cd98f00b204e9800998ecf8427e",
+  "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+  "spec/spec_helper.rb": "792eeb7aa7edafb93e2bc1d27c5e75c5",
+  "tests/init.pp": "62be788ac98326e5340ee688eb3714bc"
+}

@@ -9,6 +9,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file = "default.pp"
+    puppet.module_path = "puppet/modules"
+   #puppet.options = "--verbose --debug"
   end
-
+  config.vm.synced_folder ".", "/vagrant", type: "rsync",
+    rsync__exclude: [".git/", "ember/restaurant_abh/node_modules/"]
 end
