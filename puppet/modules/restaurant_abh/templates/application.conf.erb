@@ -357,10 +357,10 @@ play.db {
 #db.default.password=${?JDBC_DATABASE_PASSWORD}
 
 # OVO SE KORISTI ZA LOKALNO
-db.default.driver=org.postgresql.Driver
-db.default.url="jdbc:postgresql://127.0.0.1:5432/restaurant_abh"
-db.default.user=abh
-db.default.password="password"
+db.default.driver=<%= @pg_driver %>
+db.default.url="<%= @pg_url %>"
+db.default.user=<%= @pg_user %>
+db.default.password="<%= @pg_password %>"
 
 # Keys
 sendGridAPIKey = ${?SENDGRID_API_KEY}

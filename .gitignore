@@ -45,3 +45,9 @@ server.pid
 *.sublime-workspace
 .idea
 .sbtserver
+
+#puppet
+puppet/.tmp
+puppet/modules/*
+!puppet/modules/restaurant_abh
+!puppet/modules/download_uncompress
