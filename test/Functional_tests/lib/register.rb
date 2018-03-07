@@ -64,4 +64,14 @@ def fill_in_confirm_password(password)
       @session.driver.browser.find_element(:css,"a.dropdown-toggle").text    
     end
   end
+
+def click_on_create_account_button_empty_invalid_data
+    @session.within(:register_area) do
+      @session.click_button('Create Account')
+      sleep(1)
+      @session.driver.browser.find_element(:css,"div.alertText").text    
+    end
+  end
+
+  
 end

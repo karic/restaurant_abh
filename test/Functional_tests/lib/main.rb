@@ -17,13 +17,19 @@ end
 def click_on_navigation_home
     @session.within(:menu_area) do
     @session.find_link('Home').click
-    wait = Selenium::WebDriver::Wait.new(:timeout => 4)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 8)
 input = wait.until {
     element= @session.driver.browser.find_element(:css,"div.background > h1")
     element if element.displayed?
 }  
 input.text
   end
+end
+
+def check_reservations_page_open
+    @session.within(:find_a_table_area) do
+    search_button= @session.driver.browser.find_element(:css,"div.reservation_column_button > button").text
+end
 end
 
 def click_on_reservations_link
