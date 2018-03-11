@@ -19,6 +19,8 @@ let(:login) { @homepage.get_main.get_login }
   context "No entered data, click login button" do
     it "Not logged in successfully" do
       login_check= login.click_on_login_button_invalid_data
+      sleep(1)
+      
       expect(login_check).to eq('Warning! All fields are required.')
     end
   end
@@ -28,6 +30,8 @@ let(:login) { @homepage.get_main.get_login }
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
+      sleep(1)
+            
       expect(login_check).to eq('Entered data is not valid! You have 1 of 5 attempts!')
     end
   end
@@ -37,6 +41,8 @@ let(:login) { @homepage.get_main.get_login }
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
+      sleep(1)
+      
       expect(login_check).to eq('Entered data is not valid! You have 2 of 5 attempts!')
     end
   end
@@ -46,6 +52,8 @@ let(:login) { @homepage.get_main.get_login }
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
+      sleep(1)
+      
       expect(login_check).to eq('Entered data is not valid! You have 3 of 5 attempts!')
     end
   end
@@ -55,6 +63,8 @@ let(:login) { @homepage.get_main.get_login }
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
+      sleep(1)
+      
       expect(login_check).to eq('Entered data is not valid! You have 4 of 5 attempts!')
     end
   end
@@ -64,6 +74,8 @@ let(:login) { @homepage.get_main.get_login }
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
+      sleep(1)
+      
       expect(login_check).to eq('Entered data is not valid! You have 5 of 5 attempts!')
     end
   end
@@ -73,6 +85,8 @@ context "Fill in email and invalid password and click login button" do
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
+      sleep(1)
+      
       expect(login_check).to eq('Your account is currently locked for 15 minutes!')
     end
   end

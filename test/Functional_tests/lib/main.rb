@@ -71,6 +71,9 @@ end
     Reserve.new(@session)
   end
 
+def get_review
+    Review.new(@session)
+  end
   def get_admin
     Admin.new(@session)
   end

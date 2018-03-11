@@ -6,6 +6,7 @@ restaurant_name= "Dummy restoran"
 how_many_people= "6 people"
 people= how_many_people.split.first
 hour= "07:00 PM"
+
 describe "Reservation of restaurant table with not exisiting restaurant name" do
 
 let(:main) { @homepage.get_main }

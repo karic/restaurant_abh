@@ -30,11 +30,10 @@ def pick_hour(pick_hour)
 
 def clear_existing_content(hour)
     @session.within(:find_a_table_area) do
-      require 'byebug' ; byebug
     hours= @session.driver.browser.find_element(:xpath,"//div[contains(@data-value,'#{hour}')]")
     hours= hours.find_element(:xpath,"..");
     hours.click
-    #hours.execute_script("arguments[0].setAttribute('class', 'selectize-input items has-options full has-items focus input-active dropdown-active');")
+    @session.driver.browser.find_element(:xpath,"//div[@class='selectize-input items has-options full has-items focus input-active dropdown-active']//input").send_keys(:backspace)
   end
 end
 
@@ -52,6 +51,13 @@ end
     end
   end
 
+def click_on_find_a_table_button_reserve_now
+    @session.within(:find_a_table_area) do
+      @session.click_button('Find a table')
+      message= @session.driver.browser.find_element(:xpath,"//div[@class='select_time_best_fits']").text
+    end
+  end
+
 def click_on_search_button_no_restaurant
     @session.within(:find_a_table_area) do
       @session.click_button('Search')
@@ -65,10 +71,11 @@ def click_on_search_button_no_restaurant
       @session.click_button('Search')
     end
   end
+
   def click_on_find_a_table_button_empty_mandatory_field
     @session.within(:find_a_table_area) do
       @session.click_button('Find a table')
-      message= @session.driver.browser.find_element(:xpath,"//div[@class=\"alert alert-danger\"]").text.split(/\n/)[1]
+      message= @session.driver.browser.find_element(:xpath,"//div[@class=\"alert alert-danger\"]").text
     end
   end
 
@@ -82,8 +89,8 @@ def click_on_search_button(restaurant_name)
 
 def click_on_filter_by
     @session.within(:find_a_table_area) do
-      filter_by= @session.driver.browser.find_element(:xpath,"//span[@class='glyphicon glyphicon-chevron-down arrow_down']").click
       sleep(1)
+      filter_by= @session.driver.browser.find_element(:xpath,"//span[@class='glyphicon glyphicon-chevron-down arrow_down']").click
       filter= @session.driver.browser.find_element(:xpath,"//h4[text()='PRICE']").text
     end
   end
@@ -129,21 +136,29 @@ def click_on_cousine(cousine)
 end
 end
 
-=begin
-def click_on_location(location)
-    @session.within(:find_a_table_area) do
-      sleep(1)
-      filter_by= @session.driver.browser.find_element(:xpath,"//a[text()='#{location}']").click
-      foods= @session.driver.browser.find_elements(:xpath,"//div[@class='restaurant_food']")
-      @f=true
-      foods.each do |food|
-        @f= @f and food.text.split("|").include?(cousine)
-  end
-  @f
+def click_on_popular_location(location)
+    @session.within(:restaurant_page_area) do
+      @session.driver.browser.find_element(:xpath,"//div[@class='homepage_location']//a[text()='#{location}']").click
+      number_rest= @session.driver.browser.find_element(:xpath,"//a[text()='#{location}']")
+      number_rest= number_rest.find_element(:xpath,"..");
+      number_rest= number_rest.find_element(:xpath,"//div[@class='details']")
+      number_rest= number_rest.text.split.first.to_i
+      foods= @session.driver.browser.find_elements(:xpath,"//div[@class='ember-view restaurantbox']")
+      how_many= foods.size
+      number_rest == how_many
 end
 end
-=end
 
+def click_on_x_pop_location(location)
+  @session.within(:restaurant_page_area) do
+    foods= @session.driver.browser.find_elements(:xpath,"//div[@class='ember-view restaurantbox']")
+    how_many_before= foods.size
+    @session.driver.browser.find_element(:xpath,"//div[@class='homepage_location']//a[text()='#{location}']").click
+    foods_a= @session.driver.browser.find_elements(:xpath,"//div[@class='ember-view restaurantbox']")
+    how_many_after= foods_a.size
+    how_many_before < how_many_after
+  end
+end
 
 def click_on_reserve_now(restaurant_name)
     @session.within(:reserve_now_area) do

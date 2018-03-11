@@ -34,6 +34,17 @@ Capybara.add_selector(:reserve_now_area) do
   xpath { "//div[@class=\"ember-view restaurantbox\"]" }
 end
 
+Capybara.add_selector(:review_area) do
+  xpath { "//div[@class=\"restaurant_header_big\"]" }
+end
+
+Capybara.add_selector(:rate_this_place_area) do
+  xpath { "//div[@class=\"modal-body\"]" }
+end
+
+Capybara.add_selector(:restaurant_page_area) do
+  xpath { "//div[@id=\"main\"]" }
+end
 
 # admin
 

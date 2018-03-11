@@ -40,7 +40,6 @@ def fill_in_phone (phone)
     city= city.find_element(:xpath,"..");
     city= city.find_element(:xpath,"..");
     city.click
-    #radi sa unosom 'Sarajevo', ali ne i sa varijablom city?!?
     city= city.find_element(:xpath,"//div[contains(@data-value,'#{acity}')]").click
     end
   end

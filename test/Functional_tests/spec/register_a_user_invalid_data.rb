@@ -11,7 +11,7 @@ phone_invalid="+38761546765"
 country= "Bosnia and Herzegovina"
 city= "Sarajevo"
 
-describe "Registration of a user mandatory fields" do
+describe "Registration of user - invalid data" do
 
   let(:register) { @homepage.get_main.get_register }
 

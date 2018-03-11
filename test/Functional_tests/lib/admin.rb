@@ -252,6 +252,54 @@ def click_on_administration_users
   end
 end
 
+def click_on_administration_categories
+    @session.within(:admin_navigation_area) do
+    @session.find_link('Categories').click
+    @session.driver.browser.find_element(:xpath,"//div[@class=\"col-md-2\"]/button").text
+  end
+end
+
+def click_on_add_categories_button
+    @session.within(:add_restaurants_area) do
+    @session.driver.browser.find_element(:xpath,"//div[@class=\"col-md-2\"]/button").click
+    sleep(1)
+    @session.driver.browser.find_element(:xpath,"//button[@class=\"btn button pull-right\"]").text
+  end
+end
+
+def add_new_category(category_name)
+    @session.within(:restaurant_tab_area) do
+    @session.driver.browser.find_element(:xpath,"//div[@class='form-group']//input[@class='form-control input_fields ember-view ember-text-field']").send_keys("#{category_name}")
+    @session.click_button('Add category')
+    @session.driver.browser.find_element(:xpath,"//a[@class=\"close\"]").click
+
+  end
+end
+
+def click_on_administration_locations
+    @session.within(:admin_navigation_area) do
+    @session.find_link('Locations').click
+    @session.driver.browser.find_element(:xpath,"//div[@class=\"col-md-2\"]/button").text
+  end
+end
+
+def click_on_add_locations_button
+    @session.within(:add_restaurants_area) do
+    @session.driver.browser.find_element(:xpath,"//div[@class=\"col-md-2\"]/button").click
+    sleep(1)
+    @session.driver.browser.find_element(:xpath,"//button[@class=\"btn button pull-right\"]").text
+  end
+end
+
+def add_new_location(location_name)
+    @session.within(:restaurant_tab_area) do
+    @session.driver.browser.find_element(:xpath,"//div[@class='form-group']//input[@class='form-control input_fields ember-view ember-text-field']").send_keys("#{location_name}")    
+    @session.click_button('Add location')
+    @session.driver.browser.find_element(:xpath,"//a[@class=\"close\"]").click
+
+  end
+end
+
 def click_on_delete_existing_user(user_email)
     @session.within(:restaurants_table_area) do
     del= @session.driver.browser.find_element(:xpath,"//td[contains(text(),'#{user_email}')]/following-sibling::td/span[@class=\"glyphicon glyphicon-trash\"]")
