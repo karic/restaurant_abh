@@ -127,8 +127,11 @@ UserController extends Controller {
     @Transactional
     public Result logout(String token){
         User user = User.findByToken(token);
-        user.setToken("");
-        user.save();
+
+        if (user != null) {
+            user.setToken("");
+            user.save();
+        }
 
         return ok();
     }
@@ -166,6 +169,9 @@ UserController extends Controller {
         if(checkUser.findByEmail(user.getEmail()) == null){
 
             //Validation
+            if(!user.getFirstName().matches("^[A-Z].[a-zA-Z]*")){ //First name first letter capital
+                return badRequest("{\"error\": \"First name must start with capital letter!\"}");
+            }
             if(!user.getFirstName().matches("[A-Z][a-zA-Z]*")){ //First name
                 return badRequest("{\"error\": \"First name is not valid!\"}");
             }
@@ -266,7 +272,7 @@ UserController extends Controller {
         User user = new User();
 
         //Check is there user with this name already
-        if(user.findByEmail(inputForm.get().email) == null){
+        if(user.findByEmail(inputForm.get().email) == null) {
 
             //Insert values
             user.setFirstName(inputForm.get().firstName);
@@ -277,10 +283,14 @@ UserController extends Controller {
             user.setCity(inputForm.get().city);
             user.setCountry(inputForm.get().country);
 
-            //Save to database
-            user.save();
+            if (user.findByEmail(user.getEmail()) != null) {
+                return badRequest("{\"error\": \"User with entered mail exist!!\"}");
+            } else {
+                //Save to database
+                user.save();
 
-            return ok(Json.toJson(user));
+                return ok(Json.toJson(user));
+            }
         } else {
             return badRequest("{\"error\": \"User already exist!\"}");
         }
@@ -295,7 +305,25 @@ UserController extends Controller {
         User user = new User();
         user = user.findById(inputForm.get().id);
 
-        if(user != null){
+        //Update values
+        user.setFirstName(inputForm.get().firstName);
+        user.setLastName(inputForm.get().lastName);
+        user.setPhone(inputForm.get().phone);
+        user.setCity(inputForm.get().city);
+        user.setCountry(inputForm.get().country);
+
+        if(inputForm.get().password != "") {
+             user.setPassword(User.md5(inputForm.get().password));
+        }
+
+        if (!user.getEmail().equals(inputForm.get().email) && user.findByEmail(inputForm.get().email) != null) {
+            return badRequest("{\"error\": \"User with entered mail exist!!\"}");
+        } else if(user != null){
+            user.setEmail(inputForm.get().email);
+
+            //Save to database
+            user.update();
+
             return ok(Json.toJson(user));
         } else {
             return badRequest("{\"error\": \"User doesn't exist!\"}");

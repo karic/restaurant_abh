@@ -110,7 +110,9 @@ export default Ember.Controller.extend({
         var data = JSON.stringify(self.get('user'));
 
         self.get('ajax').ajaxRequest("/api/v1/admin/editUser", "POST", data, false).fail(function(data) {
-          console.log(data);
+          self.set('notification.visible', true);
+          self.set('notification.classStyle', 'alert-danger');
+          self.set('notification.text', JSON.parse(data.responseText).error);
         }).then(function(data) {
           //Display notification
           self.set('notification.visible', true);

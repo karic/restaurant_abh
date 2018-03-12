@@ -27,9 +27,12 @@ export default Ember.Route.extend({
           self.refresh();
        } else {
           //Check does location exist on google map
-         this.get('ajax').ajaxRequest("https://maps.googleapis.com/maps/api/geocode/json?address=" +
-           self.get('location.name') + "&key=AIzaSyDOBtNUVb3u39Vnu2xcEhxlS8pyozc4Gvs", "GET", null,
-           false).fail(function(data) {
+         $.ajax({ //No return here
+           url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + self.get('location.name') + "&key=AIzaSyDOBtNUVb3u39Vnu2xcEhxlS8pyozc4Gvs",
+           type: "GET",
+           processData: false,
+           async:false, //Need to wait
+         }).fail(function(data) {
               console.log(data);
           }).then(function(data) {
             console.log(data.status);
