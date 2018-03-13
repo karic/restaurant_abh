@@ -1,6 +1,8 @@
 Exec { path => ['/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/', '/opt/play/', '/opt/gecko/', '/usr/local/bin'] }
 
-$packages = ['default-jre', 'default-jdk', 'postgis', 'postgresql-9.5-postgis-2.2', 'ruby2.3', 'firefox', 'xvfb', 'ruby2.3-dev', 'postgresql-server-dev-all', 'libpqxx-dev', 'unzip']
+$packages = ['default-jre', 'default-jdk', 'postgis', 'postgresql-9.5-postgis-2.2', 'ruby2.3', 'firefox', 'xvfb', 'ruby2.3-dev', 'postgresql-server-dev-all', 'libpqxx-dev', 'unzip' ]
+include apt
+
 package { $packages:
 ensure      => 'installed'
 }->
@@ -47,12 +49,11 @@ class { 'playframework':
 $npm_packages = ['ember-cli', 'bower']
 
 class { 'nodejs':
-  #repo_url_suffix => '9.x',
-  #  manage_package_repo       => false,
-    nodejs_dev_package_ensure => 'present',
-  # nodejs_package_ensure => 'latest',
-    npm_package_ensure    => 'present',
-  #  require  => Exec['nodesourceppa'],
+  repo_url_suffix           => '9.x',
+  manage_package_repo       => true,
+  nodejs_dev_package_ensure => 'present',
+  nodejs_package_ensure     => 'present',
+  npm_package_ensure        => 'present',
 }
 ->
 file { '/usr/bin/node':
@@ -170,7 +171,7 @@ class nodeinstall{
     command => 'npm install',
     cwd     => '/vagrant/ember/restaurant_abh/',
     user    => vagrant,
-    timeout => 900,
+    timeout => 1800,
   }
 
   ###file{ '/home/vagrant/rabh':
