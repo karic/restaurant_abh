@@ -6,7 +6,12 @@ forge "https://forgeapi.puppetlabs.com"
 
 mod 'puppetlabs-postgresql'
 mod 'puppet-nodejs'
+mod 'puppetlabs-apt'
 #mod 'dsestero-download_uncompress'
+
+
+
+
 # use dependencies defined in metadata.json
 #metadata
 
