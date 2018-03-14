@@ -32,7 +32,6 @@ context "Fill all fields except Country" do
       register.fill_in_last_name(last_name)
       register.fill_in_email(email)
       register.fill_in_phone(phone)
-      register.select_city(city)
       register.fill_in_password(password)
       register.fill_in_confirm_password(password)
       register_check= register.click_on_create_account_button_empty_invalid_data
