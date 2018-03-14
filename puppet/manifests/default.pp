@@ -49,8 +49,8 @@ class { 'playframework':
 $npm_packages = ['ember-cli', 'bower']
 
 class { 'nodejs':
-  repo_url_suffix           => '9.x',
-  manage_package_repo       => true,
+ #repo_url_suffix           => '9.x',
+ #manage_package_repo       => true,
   nodejs_dev_package_ensure => 'present',
   nodejs_package_ensure     => 'present',
   npm_package_ensure        => 'present',
