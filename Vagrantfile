@@ -23,8 +23,11 @@ Vagrant.configure("2") do |config|
     aws.security_groups = [ 'vagrant' ]
     aws.keypair_name = "karic_praksa"
     aws.user_data = File.read("cloudconfig") 
+#Ubuntu Server 16.04 LTS
     aws.ami = "ami-5055cd3f"
-    aws.instance_type= "t2.micro"
+#ABH-Stage2 AMI
+    #aws.ami = "ami-89264de6"
+    aws.instance_type= "t2.small"
 
     override.nfs.functional = false
     override.ssh.username = "vagrant"
