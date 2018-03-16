@@ -54,7 +54,7 @@ context "Click on Reserve now button" do
 context "Enter values for all fields except how many people" do
     it "fails to find a table successfully" do
       reserve.pick_hour(hour)
-      error_message = reserve.click_on_find_a_table_button_empty_mandatory_field
+      error_message = reserve.click_on_find_a_table_button_empty_mandatory_field_reserve_now
       expect(error_message).to eq("All fields are required!")
     end
   end
@@ -63,7 +63,7 @@ context "Enter values for all fields except how many people" do
     it "fails to find a table successfully" do
       reserve.pick_how_many_people(how_many_people)
       reserve.clear_existing_content(hour)
-      error_message = reserve.click_on_find_a_table_button_empty_mandatory_field
+      error_message = reserve.click_on_find_a_table_button_empty_mandatory_field_reserve_now
       expect(error_message).to eq("All fields are required!")
     end
   end

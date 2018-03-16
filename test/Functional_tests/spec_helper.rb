@@ -24,9 +24,10 @@ RSpec.configure do |config|
 
   config.before(:all) do
       if setup.headless then
-        @headless = Headless.new
-        @headless.start
+        $headless = Headless.new
+        $headless.start
       end
+     #@headless=Headless.new(destroy_at_exit: true).start 
     puts "Loading session..."
       @homepage = setup.load_browser
   end
@@ -36,7 +37,7 @@ RSpec.configure do |config|
       setup.web['driver'] == 'firefox' ? @homepage.close : @homepage.quit
       sleep 2
       if setup.headless then
-       @headless.destroy
+       $headless.destroy
       end
     end
   # rspec-expectations config goes here. You can use an alternate

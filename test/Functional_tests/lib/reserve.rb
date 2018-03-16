@@ -54,7 +54,7 @@ end
 def click_on_find_a_table_button_reserve_now
     @session.within(:find_a_table_area) do
       @session.click_button('Find a table')
-      message= @session.driver.browser.find_element(:xpath,"//div[@class='select_time_best_fits']").text
+      message= @session.driver.browser.find_element(:xpath,"//h4[@class='select_time_best_fits']").text
     end
   end
 
@@ -75,6 +75,13 @@ def click_on_search_button_no_restaurant
   def click_on_find_a_table_button_empty_mandatory_field
     @session.within(:find_a_table_area) do
       @session.click_button('Find a table')
+      message= @session.driver.browser.find_element(:xpath,"//div[@class=\"alert alert-danger\"]").text.split(/\n/)[1]
+    end
+  end
+
+  def click_on_find_a_table_button_empty_mandatory_field_reserve_now
+    @session.within(:find_a_table_area) do
+      @session.click_button('Find a table')
       message= @session.driver.browser.find_element(:xpath,"//div[@class=\"alert alert-danger\"]").text
     end
   end
@@ -90,7 +97,8 @@ def click_on_search_button(restaurant_name)
 def click_on_filter_by
     @session.within(:find_a_table_area) do
       sleep(1)
-      filter_by= @session.driver.browser.find_element(:xpath,"//span[@class='glyphicon glyphicon-chevron-down arrow_down']").click
+      filter_by= @session.driver.browser.find_element(:xpath,"//span[@class='glyphicon glyphicon-chevron-down arrow_down']")
+      @session.driver.browser.action.move_to(filter_by).perform
       filter= @session.driver.browser.find_element(:xpath,"//h4[text()='PRICE']").text
     end
   end
@@ -171,9 +179,7 @@ def click_on_reserve_now(restaurant_name)
 def click_on_time_slot(hour)
     @session.within(:time_slots_area) do
       @session.driver.browser.find_element(:css,"div.reservation_choose_time > a").click
-      #c=b.text
-      #if c== hour then b.click end
-        @session.driver.browser.find_element(:css,"h1.complete_reservation_title").text 
+      @session.driver.browser.find_element(:css,"h1.complete_reservation_title").text 
 end
 end
 

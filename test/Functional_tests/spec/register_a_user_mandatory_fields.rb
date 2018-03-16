@@ -63,7 +63,7 @@ context "Fill all fields except City" do
       register.fill_in_password(password)
       register.fill_in_confirm_password(password)
       register_check= register.click_on_create_account_button_empty_invalid_data
-      expect(register_check).to eq('First name is not valid!')
+      expect(register_check).to eq('First name must start with capital letter!')
     end
   end
 

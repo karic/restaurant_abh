@@ -2,12 +2,10 @@ require './spec_helper'
 
 email = "irfankr91@gmail.com"
 password = "12345"
-user_email="berina.avdicvx@gmail.com"
 restaurant_name= "Restoran test"
 price_range= "Rank 3"
 new_price_range= "Rank 4"
-category= "Bosnian"
-location_test="Chicago"
+category= "Bosniana"
 location= "Baltimore"
 description= "Restoran test is newly opened restaurant in Baltimore serving typical Bosnian couisine."
 
@@ -77,7 +75,7 @@ end
 
 context "Add new location" do
   it "New location added successfully" do
-    locat= admin.add_new_category(location)
+    locat= admin.add_new_location(location)
     expect(locat).to match(/successful insert/i)
   end
 end
@@ -102,7 +100,7 @@ context "Fill in valid restaurant name, description, price range, location, cate
       admin.fill_in_restaurant_name(restaurant_name)
       admin.fill_in_description(description)
       admin.select_price_range(price_range)
-      admin.select_location(location_test)
+      admin.select_location(location)
       admin.select_category(category)
       add_rest= admin.click_on_add_restaurant_button
       save=admin.click_on_save_info_button

@@ -271,8 +271,7 @@ def add_new_category(category_name)
     @session.within(:restaurant_tab_area) do
     @session.driver.browser.find_element(:xpath,"//div[@class='form-group']//input[@class='form-control input_fields ember-view ember-text-field']").send_keys("#{category_name}")
     @session.click_button('Add category')
-    @session.driver.browser.find_element(:xpath,"//a[@class=\"close\"]").click
-
+    array= @session.driver.browser.find_element(:xpath,"//div[@class=\"alert alert-success\"]").text.split(/\n/)[1]
   end
 end
 
@@ -295,8 +294,7 @@ def add_new_location(location_name)
     @session.within(:restaurant_tab_area) do
     @session.driver.browser.find_element(:xpath,"//div[@class='form-group']//input[@class='form-control input_fields ember-view ember-text-field']").send_keys("#{location_name}")    
     @session.click_button('Add location')
-    @session.driver.browser.find_element(:xpath,"//a[@class=\"close\"]").click
-
+    array= @session.driver.browser.find_element(:xpath,"//div[@class=\"alert alert-success\"]").text.split(/\n/)[1]
   end
 end
 
