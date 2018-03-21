@@ -136,11 +136,11 @@ class geckoinstall{
     mode    => '0755',
   }
   
-  exec { 'bundleinstalltest':
-    command => 'bundle install',
-    cwd     => '/vagrant/test/Functional_tests',
-    user    => vagrant,
-  }
+  #exec { 'bundleinstalltest':
+  #  command => 'bundle install',
+  #  cwd     => '/vagrant/test/Functional_tests',
+  #  user    => vagrant,
+  #}
 
 }
 
