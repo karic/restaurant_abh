@@ -1,6 +1,6 @@
 environment: 
-  url: http://ec2-52-59-231-235.eu-central-1.compute.amazonaws.com:9000/
-  headless: false
+  url: http://localhost:9000/
+  headless: true
   web:
     driver: firefox
     

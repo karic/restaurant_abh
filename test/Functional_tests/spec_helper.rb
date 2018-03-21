@@ -34,7 +34,8 @@ RSpec.configure do |config|
 
   config.after(:all) do
       puts "Quitting browser session..."
-      setup.web['driver'] == 'firefox' ? @homepage.close : @homepage.quit
+      #setup.web['driver'] == 'firefox' ? @homepage.close : @homepage.quit
+      @homepage.quit
       sleep 2
       if setup.headless then
        $headless.destroy
