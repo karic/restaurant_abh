@@ -1,6 +1,6 @@
 require './spec_helper'
 
-email = "berina.avdicvx@gmail.com"
+email = "irfankr91@gmail.com"
 password = "blablabla"
 
 describe "Login functionality - invalid data" do

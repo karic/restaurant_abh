@@ -1,7 +1,7 @@
 require './spec_helper'
 
-email = "berina.avdicvx@gmail.com"
-password = "restoran"
+email = "irfankr91@gmail.com"
+password = "12345"
 restaurant_name= "Dummy restoran"
 how_many_people= "6 people"
 people= how_many_people.split.first

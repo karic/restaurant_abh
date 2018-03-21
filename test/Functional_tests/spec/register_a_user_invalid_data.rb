@@ -3,7 +3,7 @@ require './spec_helper'
 first_name_lower= "berina"
 first_name="Berina"
 last_name= "Avdic"
-email_existing = "berina.avdicvx@gmail.com"
+email_existing = "irfankr91@gmail.com"
 email_new = "berina.avdicvxy@gmail.com"
 password = "restoran"
 phone_valid= "061546765"

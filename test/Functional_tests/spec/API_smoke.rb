@@ -1,7 +1,7 @@
 require 'rest-client'
 require 'json'
 
-domain="http://ec2-52-59-231-235.eu-central-1.compute.amazonaws.com"
+domain="http://ec2-18-194-88-22.eu-central-1.compute.amazonaws.com"
 port="9000"
 apiversion="/api/v1"
 url=domain+":"+port+apiversion
@@ -32,7 +32,7 @@ context "Add new location" do
 
 context "Add new category" do
     it "admin adds new category sucessfully" do
-      category= RestClient.post(url+'/admin/addCategory', {name:'Bos'}, :'X-AUTH-TOKEN'=>$id_token)
+      category= RestClient.post(url+'/admin/addCategory', {name:'Bosnian'}, :'X-AUTH-TOKEN'=>$id_token)
       parsed = JSON.parse(category.body)
       $id_category= parsed['id']
       expect(category.code).to match(200)
@@ -49,15 +49,25 @@ context "Add new restaurant" do
       expect(parsed['restaurantName']).to match (/Restoran test/i)
 	  expect(parsed['description']).to match (/Great food/i)     
 	  end
-    end
+  end
 
 context "Add table to new restaurant" do
     it "admin adds table to new restaurant sucessfully" do
-    restaurant= RestClient.post(url+'/admin/adminTableItems',{"addQueue":[{"sittingPlaces":"5","idRestaurant":$id_restaurant,"id":""}],"editQueue":[],"deleteQueue":[]}, :'X-AUTH-TOKEN'=>$id_token)
-      parsed = JSON.parse(restaurant.body)
-      expect(restaurant.code).to match(200)    
+    restaurant= RestClient.post(url+'/admin/adminTableItems', {addQueue:[{sittingPlaces:22}],editQueue:[],deleteQueue:[],idRestaurant:$id_restaurant}, :'X-AUTH-TOKEN'=>$id_token)
+    expect(restaurant.code).to match(200)    
 	  end
+  end
+
+context "Get all tables for new restaurant" do
+    it "admin gets tables for new restaurant sucessfully" do
+    restaurant= RestClient.post(url+'/admin/getAllRestaurantTables', {idRestaurant:$id_restaurant}, :'X-AUTH-TOKEN'=>$id_token)
+      parsed = JSON.parse(restaurant.body)
+      puts "------"
+      puts parsed
+      $id_table= parsed[0]['id']
+      expect(restaurant.code).to match(200)    
     end
+  end
 
 context "Edit newly added restaurant" do
     it "admin edits newly added restaurant sucessfully" do
@@ -65,7 +75,7 @@ context "Edit newly added restaurant" do
       parsed = JSON.parse(restaurant.body)
       expect(restaurant.code).to match(200)
       expect(parsed['restaurantName']).to match (/Restoran test novi/i)
-	  expect(parsed['priceRange']).to be 3     
+	    expect(parsed['priceRange']).to be 3     
 	  end
   end
 
@@ -74,12 +84,12 @@ context "Register a new user" do
 	  register= RestClient.post(url+'/register', {email:'noviuser3@gmail.com',firstName:'Novi',lastName:'Korisnik',Phone:'13215156',country:'BiH',city:'Maglaj',password:'10062016'})
 	  parsed = JSON.parse(register.body)
 	  $id_user= parsed['id']
-      expect(register.code).to match(200)
+    expect(register.code).to match(200)
 	  expect(parsed['firstName']).to match(/Novi/i)
-      expect(parsed['lastName']).to match(/Korisnik/i)
+    expect(parsed['lastName']).to match(/Korisnik/i)
 	  expect(parsed['email']).to match(/noviuser3@gmail.com/i)
-      end
     end
+  end
 
 context "Log in user" do
     it "user logs in sucessfully" do
@@ -102,14 +112,9 @@ context "Make a reservation" do
       end
     end
 
-#     "persons":"3 people",
-# "reservationDate":"Jul 15, 2016",
-# "reservationHour":"10:30 AM",
-# "idRestaurant":"3001"
-
 context "Cancel a reservation" do
     it "reservation is canceled sucessfully" do
-      reserve= RestClient.post(url+'/cancelReservation', {"idReservation":$id_reservation}, :'X-AUTH-TOKEN'=>$id_token_user)
+      reserve= RestClient.post(url+'/cancelReservation', {idReservation:$id_reservation}, :'X-AUTH-TOKEN'=>$id_token_user)
       parsed = JSON.parse(reserve.body)
       expect(reserve.code).to match(200)
       end
@@ -120,7 +125,7 @@ context "Delete newly added location" do
       restaurant= RestClient.post(url+'/admin/deleteLocation', {id:$id_location}, :'X-AUTH-TOKEN'=>$id_token)
       expect(restaurant.code).to match(200) 
 	  end
-    end
+  end
 
 context "Delete newly added category" do
     it "admin deletes newly added category sucessfully" do
@@ -129,6 +134,13 @@ context "Delete newly added category" do
 	  end
     end
 
+context "Delete table to new restaurant" do
+    it "admin deletes table to new restaurant sucessfully" do
+    restaurant= RestClient.post(url+'/admin/adminTableItems', {addQueue:[],editQueue:[],deleteQueue:[{id:$id_table}],idRestaurant:$id_restaurant}, :'X-AUTH-TOKEN'=>$id_token)
+      parsed = JSON.parse(restaurant.body)
+      expect(restaurant.code).to match(200)    
+    end
+    end
 context "Delete newly added restaurant" do
     it "admin deletes newly added restaurant sucessfully" do
       restaurant= RestClient.post(url+'/admin/deleteRestaurant', {id:$id_restaurant}, :'X-AUTH-TOKEN'=>$id_token)

@@ -1,9 +1,8 @@
 require './spec_helper'
 
-email = "berina.avdic@outlook.com"
-password = "123"
-
-restaurant_name= "Baja Fresh"
+email = "irfankr91@gmail.com"
+password = "12345"
+restaurant_name= "Pasta n Pizza"
 rate_stars="5 stars"
 rate_stars_= rate_stars.split.first.to_i
 comment= "I think this is fantastic restaurant!"
@@ -61,7 +60,6 @@ context "Fill in rate stars, commment and click Rate button" do
       expect(click).to eq 1
       end
     end
-#try to add new comment from same account and for same restaurant
 
 context "Click on rate this place" do
     it "Opens rate this place window successfully" do
