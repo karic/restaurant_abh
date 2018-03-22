@@ -70,7 +70,7 @@ context "Click on reservations from first name dropwon " do
 context "Click on cancel reservations" do
    it "reservations canceled successfully" do
      cancel_reservation= reserve.click_on_cancel_reservation_button(restaurant_name, people)
-     expect(cancel_reservation).to match(/reservation canceled/i)
+     expect(cancel_reservation).to eq(false)
     end
   end
   

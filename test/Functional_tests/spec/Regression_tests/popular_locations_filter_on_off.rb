@@ -2,8 +2,7 @@ require './spec_helper'
 
 email = "irfankr91@gmail.com"
 password = "12345"
-restaurant_name= "Wingz N Tingz"
-location= "Boston"
+location= "Chicago"
 
 describe "Popular locations filter on and off" do
 
@@ -36,14 +35,14 @@ context "Navigation to Restaurants page" do
     end
 
 context "Click on one of listed location in Popular location section" do
-    it "Restaurants are sucessfully filtered by location" do
+    it "restaurants are sucessfully filtered by location" do
       pop_location= reserve.click_on_popular_location(location)
       expect(pop_location).to eq(true)
       end
     end
 
 context "Click on x location filter in Popular location" do
-    it "All restaurants are listed" do
+    it "all restaurants are listed" do
       pop_location= reserve.click_on_x_pop_location(location)
       expect(pop_location).to eq(true)
       end

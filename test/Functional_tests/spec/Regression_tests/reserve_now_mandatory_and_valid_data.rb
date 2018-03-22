@@ -2,9 +2,10 @@ require './spec_helper'
 
 email = "irfankr91@gmail.com"
 password = "12345"
-restaurant_name= "Wingz N Tingz"
+restaurant_name= "Sufis"
 hour= "10:00 PM"
-how_many_people = "6 people"
+how_many_people = "3 people"
+people= how_many_people.split.first
 
 describe "Reserve now mandatory fields and valid reservation" do
 
@@ -37,7 +38,7 @@ context "Navigation to Restaurants page" do
     end
 
 context "Fill in restaurant name in Search" do
-    it "Restaurant found sucessfully" do
+    it "restaurant found sucessfully" do
       reserve.fill_in_restaurant_name(restaurant_name)
       restaurants_header= reserve.click_on_search_button(restaurant_name)
       expect(restaurants_header).to eq(restaurant_name)
@@ -45,7 +46,7 @@ context "Fill in restaurant name in Search" do
   end
 
 context "Click on Reserve now button" do
-    it "Reserve now form opened successfully" do
+    it "reserve now form opened successfully" do
       reserve_now= reserve.click_on_reserve_now(restaurant_name)
       expect(reserve_now).to eq(restaurant_name)
     end
@@ -59,7 +60,7 @@ context "Enter values for all fields except how many people" do
     end
   end
 
-context "Enter values for all fields except how many people" do
+context "Enter values for all fields except pick hour" do
     it "fails to find a table successfully" do
       reserve.pick_how_many_people(how_many_people)
       reserve.clear_existing_content(hour)
@@ -89,5 +90,20 @@ context "Click on complete reservation button" do
      expect(complete_reservations).to match(/reservation is successfull/i)
     end
   end
+
+context "Click on reservations from first name dropwon " do
+   it "reservations listed successfully" do
+     reservations= main.click_on_reservations_link
+     expect(reservations).to match(/reservation details/i)
+    end
+  end
+
+context "Click on cancel reservations" do
+   it "reservations canceled successfully" do
+     cancel_reservation= reserve.click_on_cancel_reservation_button(restaurant_name, people)
+     expect(cancel_reservation).to eq(false)
+    end
+  end
+
 end
   

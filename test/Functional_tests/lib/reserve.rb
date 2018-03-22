@@ -164,7 +164,7 @@ def click_on_x_pop_location(location)
     @session.driver.browser.find_element(:xpath,"//div[@class='homepage_location']//a[text()='#{location}']").click
     foods_a= @session.driver.browser.find_elements(:xpath,"//div[@class='ember-view restaurantbox']")
     how_many_after= foods_a.size
-    how_many_before < how_many_after
+    how_many_before <= how_many_after
   end
 end
 
@@ -202,7 +202,9 @@ def click_on_cancel_reservation_button(restaurant_name, peoplenm)
   people= cancel_reservation.find_element(:css,"div.col-md-10.complete_reservation_restaurant_details > div.row > div.col-md-2 > div.details").text
   #hour=cancel_reservation.find_element(:css,"div.col-md-10.complete_reservation_restaurant_details > div > div > div").text 
   if name==restaurant_name and people==peoplenm then @session.click_button('Cancel reservation') end
-  @session.driver.browser.find_element(:css, "div.alertText").text
+  require 'byebug'; byebug
+  if name==restaurant_name and people==peoplenm then true end
+  #@session.driver.browser.find_element(:css, "div.alertText").text
   end
 end
 

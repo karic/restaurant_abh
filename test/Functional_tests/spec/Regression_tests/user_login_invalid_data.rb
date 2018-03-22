@@ -17,7 +17,7 @@ let(:login) { @homepage.get_main.get_login }
     end
 
   context "No entered data, click login button" do
-    it "Not logged in successfully" do
+    it "not logged in successfully" do
       login_check= login.click_on_login_button_invalid_data
       sleep(1)
       
@@ -26,7 +26,7 @@ let(:login) { @homepage.get_main.get_login }
   end
 
   context "Fill in email and invalid password and click login" do
-    it "Not logged in successfully" do
+    it "not logged in successfully" do
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
@@ -37,7 +37,7 @@ let(:login) { @homepage.get_main.get_login }
   end
 
   context "Fill in email and invalid password and click login" do
-    it "Not logged in successfully" do
+    it "not logged in successfully" do
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
@@ -48,47 +48,42 @@ let(:login) { @homepage.get_main.get_login }
   end
 
   context "Fill in valid email and invalid password and click login" do
-    it "Not logged in successfully" do
+    it "not logged in successfully" do
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
       sleep(1)
-      
       expect(login_check).to eq('Entered data is not valid! You have 3 of 5 attempts!')
     end
   end
 
   context "Fill in email and invalid password and click login button" do
-    it "Not logged in successfully" do
+    it "not logged in successfully" do
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
       sleep(1)
-      
       expect(login_check).to eq('Entered data is not valid! You have 4 of 5 attempts!')
     end
   end
 
   context "Fill in email and invalid password and click login button" do
-    it "Not logged in successfully" do
+    it "not logged in successfully" do
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
       sleep(1)
-      
       expect(login_check).to eq('Entered data is not valid! You have 5 of 5 attempts!')
     end
   end
 
 context "Fill in email and invalid password and click login button" do
-    it "Not logged in successfully" do
+    it "not logged in successfully" do
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button_invalid_data
       sleep(1)
-      
       expect(login_check).to eq('Your account is currently locked for 15 minutes!')
     end
   end
-
 end

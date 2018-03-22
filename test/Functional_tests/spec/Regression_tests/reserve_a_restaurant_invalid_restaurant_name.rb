@@ -14,14 +14,14 @@ let(:reserve) { @homepage.get_main.get_reserve }
 let(:login) { @homepage.get_main.get_login }
 
   context "Click on login in navigation" do
-    it "Opens login page" do
+    it "opens login page" do
       login_header= login.click_on_navigation_login
       expect(login_header).to match(/login/i) 
       end
     end
 
   context "Fill in valid email, password and click login" do
-    it "Login fill and click successfully" do
+    it "login fill and click successfully" do
       login.fill_in_email(email)
       login.fill_in_password(password)
       login_check= login.click_on_login_button
@@ -30,14 +30,14 @@ let(:login) { @homepage.get_main.get_login }
   end
 
 context "Click on home in navigation" do
-    it "Opens home page" do
+    it "opens home page" do
       home_header= main.click_on_navigation_home
       expect(home_header).to match(/make a free reservation/i)
       end
     end
 
   context "Fill in valid restaurant name, pick how many people, date and hour" do
-    it "No available restaurants message" do
+    it "no available restaurants message" do
       reserve.fill_in_restaurant_name(restaurant_name)
       reserve.pick_how_many_people(how_many_people)
       reserve.pick_hour(hour)

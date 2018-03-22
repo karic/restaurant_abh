@@ -30,7 +30,7 @@ context "Click on create account on login page" do
   end
 
 context "Fill all fields with invalid First Name" do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name(first_name_lower)
       register.fill_in_last_name(last_name)
       register.fill_in_email(email_new)
@@ -45,7 +45,7 @@ context "Fill all fields with invalid First Name" do
   end
 
   context "Fill all fields with exsiting email" do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name(first_name)
       register.fill_in_last_name(last_name)
       register.fill_in_email(email_existing)
@@ -58,7 +58,7 @@ context "Fill all fields with invalid First Name" do
   end
 
 context "Fill all fields with invalid " do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name(first_name)
       register.fill_in_last_name(last_name)
       register.fill_in_email(email_new)

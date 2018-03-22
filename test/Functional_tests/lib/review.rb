@@ -31,20 +31,24 @@ def enter_comment(comment)
 
 def click_on_rate_this_place
  @session.within(:rate_this_place_area) do
-      prev_rate= @session.driver.browser.find_element(:xpath,"//span[@class='votes']").text[1,1]
+      prev_rate= @session.driver.browser.find_element(:xpath,"//span[@class='votes']").text
+      prev_rate= prev_rate[1,prev_rate.length-2]
       @session.click_button('Rate this place')
       sleep(2)
-      aft_rate= @session.driver.browser.find_element(:xpath,"//span[@class='votes']").text[1,1]
+      aft_rate= @session.driver.browser.find_element(:xpath,"//span[@class='votes']").text
+      aft_rate= aft_rate[1,aft_rate.length-2]
       aft_rate.to_i - prev_rate.to_i
     end
   end
 
 def click_on_rate_this_place_with_existing_rate
  @session.within(:rate_this_place_area) do
-      prev_rate= @session.driver.browser.find_element(:xpath,"//span[@class='votes']").text[1,1]
+      prev_rate= @session.driver.browser.find_element(:xpath,"//span[@class='votes']").text
+      prev_rate= prev_rate[1,prev_rate.length-2]
       @session.click_button('Rate this place')
       sleep(2)
-      aft_rate= @session.driver.browser.find_element(:xpath,"//span[@class='votes']").text[1,1]
+      aft_rate= @session.driver.browser.find_element(:xpath,"//span[@class='votes']").text
+      aft_rate= aft_rate[1,aft_rate.length-2]
       aft_rate.to_i == prev_rate.to_i
     end
   end

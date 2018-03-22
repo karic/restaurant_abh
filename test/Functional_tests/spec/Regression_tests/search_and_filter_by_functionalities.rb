@@ -41,7 +41,7 @@ context "Navigation to Restaurants page" do
     end
 
 context "Fill in invalid restaurants name in search bar" do
-    it "No restaurants found message" do
+    it "no restaurants found message" do
       reserve.fill_in_restaurant_name(restaurant_name)
       search_button= reserve.click_on_search_button_no_restaurant
       expect(search_button).to eq('No restaurants found!')
@@ -49,7 +49,7 @@ context "Fill in invalid restaurants name in search bar" do
   end
 
 context "Clear exisitng entry and click on Filter by" do
-    it "Filters displayed sucessfully" do
+    it "filters displayed sucessfully" do
       search_button=reserve.clear_search_entry
       restaurants_header= reserve.click_on_filter_by
       expect(restaurants_header).to eq('PRICE')
@@ -57,14 +57,14 @@ context "Clear exisitng entry and click on Filter by" do
   end
 
 context "Click on Price range" do
-    it "Restaurants filtered sucessfully" do
+    it "restaurants filtered sucessfully" do
       restaurants_header= reserve.click_on_dollars_sign(price)
       expect(restaurants_header).to eq(price.to_i)
     end
   end
 
 context "Click on Rating" do
-    it "Restaurants filtered sucessfully" do
+    it "restaurants filtered sucessfully" do
       restaurants_header= reserve.click_on_rating_stars(rating)
       #Rating has to be at least rating
       expect(restaurants_header).to be >= rating.to_i
@@ -72,7 +72,7 @@ context "Click on Rating" do
   end
 
 context "Click on Cousine" do
-    it "Restaurants filtered sucessfully" do
+    it "restaurants filtered sucessfully" do
       restaurants_header= reserve.click_on_cousine(cousine)
       expect(restaurants_header).to eq(true)
     end

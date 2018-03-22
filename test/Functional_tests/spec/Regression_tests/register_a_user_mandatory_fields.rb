@@ -27,7 +27,7 @@ context "Click on create account on login page" do
   end
 
 context "Fill all fields except Country" do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name(first_name)
       register.fill_in_last_name(last_name)
       register.fill_in_email(email)
@@ -40,7 +40,7 @@ context "Fill all fields except Country" do
   end
 
 context "Fill all fields except City" do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name(first_name)
       register.fill_in_last_name(last_name)
       register.fill_in_email(email)
@@ -54,7 +54,7 @@ context "Fill all fields except City" do
   end
 
   context "Fill all fields except First name" do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name("")
       register.fill_in_last_name(last_name)
       register.fill_in_email(email)
@@ -68,7 +68,7 @@ context "Fill all fields except City" do
   end
 
 context "Fill all fields except Last name" do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name(first_name)
       register.fill_in_last_name("")
       register.fill_in_email(email)
@@ -81,7 +81,7 @@ context "Fill all fields except Last name" do
   end
 
   context "Fill all fields except Email" do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name(first_name)
       register.fill_in_last_name(last_name)
       register.fill_in_email("")
@@ -94,7 +94,7 @@ context "Fill all fields except Last name" do
   end
 
 context "Fill all fields except Phone number" do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name(first_name)
       register.fill_in_last_name(last_name)
       register.fill_in_email(email)
@@ -107,7 +107,7 @@ context "Fill all fields except Phone number" do
   end
 
 context "Fill all fields except Password" do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name(first_name)
       register.fill_in_last_name(last_name)
       register.fill_in_email(email)
@@ -120,7 +120,7 @@ context "Fill all fields except Password" do
   end
 
   context "Fill all fields except Confirm password" do
-    it "New account not created successfully" do
+    it "new account not created successfully" do
       register.fill_in_first_name(first_name)
       register.fill_in_last_name(last_name)
       register.fill_in_email(email)

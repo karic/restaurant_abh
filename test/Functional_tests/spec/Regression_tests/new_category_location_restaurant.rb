@@ -2,10 +2,10 @@ require './spec_helper'
 
 email = "irfankr91@gmail.com"
 password = "12345"
-restaurant_name= "Restoran test"
+restaurant_name= "New Restaurant"
 price_range= "Rank 3"
 new_price_range= "Rank 4"
-category= "Bosniana"
+category= "Bosnians"
 location= "Baltimore"
 description= "Restoran test is newly opened restaurant in Baltimore serving typical Bosnian couisine."
 
@@ -39,42 +39,42 @@ let(:login) { @homepage.get_main.get_login }
   end
 
 context "Click on tab Categories" do
-  it "Categories page is opened successfully" do
+  it "categories page is opened successfully" do
     users= admin.click_on_administration_categories
     expect(users).to match(/add categories/i)
   end
 end
 
 context "Click on add categories button" do
-  it "Add categories page is opened successfully" do
+  it "add categories page is opened successfully" do
     users= admin.click_on_add_categories_button
     expect(users).to match(/add category/i)
   end
 end
 
 context "Add new category" do
-  it "New category added successfully" do
+  it "new category added successfully" do
     categ= admin.add_new_category(category)
     expect(categ).to match(/successful insert/i)
   end
 end
 
 context "Click on tab Locations" do
-  it "Locations page is opened successfully" do
+  it "locations page is opened successfully" do
     users= admin.click_on_administration_locations
     expect(users).to match(/add locations/i)
   end
 end
 
 context "Click on add locations button" do
-  it "Add locations page is opened successfully" do
+  it "add locations page is opened successfully" do
     users= admin.click_on_add_locations_button
     expect(users).to match(/add location/i)
   end
 end
 
 context "Add new location" do
-  it "New location added successfully" do
+  it "new location added successfully" do
     locat= admin.add_new_location(location)
     expect(locat).to match(/successful insert/i)
   end
@@ -88,7 +88,7 @@ context "Navigate to Restaurants" do
   end
 
 context "Click on add restaurants button" do
-   it "navigate and opened Restaurants page sucessfully" do
+   it "add restaurants form opened sucessfully" do
     add_restaurants= admin.click_on_add_restaurants_button
      expect(add_restaurants).to match(/add restaurant/i)
    end
@@ -106,6 +106,30 @@ context "Fill in valid restaurant name, description, price range, location, cate
       save=admin.click_on_save_info_button
       expect(add_rest).to match(/successful insert/i)
       expect(save).to match(/successful update/i)
+    end
+  end
+
+context "Delete desired location" do
+    it "desired location is deleted" do
+      admin.click_on_administration_locations
+      delete_restaurants= admin.click_on_delete_restaurant_icon(location)
+      expect(delete_restaurants).to match(/successful remove/i)
+    end
+  end
+
+context "Delete desired category" do
+    it "desired category is deleted" do
+      admin.click_on_administration_categories
+      delete_restaurants= admin.click_on_delete_restaurant_icon(category)
+      expect(delete_restaurants).to match(/successful remove/i)
+    end
+  end
+
+context "Delete desired restaurant" do
+    it "desired restaurant is deleted" do
+      admin.click_on_administration_restaurants
+      delete_restaurants= admin.click_on_delete_restaurant_icon(restaurant_name)
+      expect(delete_restaurants).to match(/successful remove/i)
     end
   end
 
