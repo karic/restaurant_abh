@@ -2,7 +2,7 @@ require './spec_helper'
 
 email = "irfankr91@gmail.com"
 password = "12345"
-restaurant_name= "Pizza n Pasta"
+restaurant_name= "Baja Fresh"
 rate_stars="5 stars"
 rate_stars_= rate_stars.split.first.to_i
 comment= "I think this is fantastic restaurant!"
