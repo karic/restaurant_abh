@@ -1,7 +1,7 @@
-require 'rest-client'
+  require 'rest-client'
 require 'json'
 
-domain="http://ec2-18-195-117-128.eu-central-1.compute.amazonaws.com"
+domain="http://localhost"
 port="9000"
 apiversion="/api/v1"
 url=domain+":"+port+apiversion
