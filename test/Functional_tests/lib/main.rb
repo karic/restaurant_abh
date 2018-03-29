@@ -17,8 +17,8 @@ end
 def click_on_navigation_home
     @session.within(:menu_area) do
     @session.find_link('Home').click
-    wait = Selenium::WebDriver::Wait.new(:timeout => 12)
-input = wait.until {
+    wait = Selenium::WebDriver::Wait.new(:timeout => 30)
+    input = wait.until {
     element= @session.driver.browser.find_element(:css,"div.background > h1")
     element if element.displayed?
 }  
