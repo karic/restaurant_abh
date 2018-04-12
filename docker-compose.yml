@@ -1,0 +1,12 @@
+version: '3'
+services:
+  play:
+    build: Play
+    ports: 
+    - "9000:9000"
+    links:
+    - postgres
+  postgres:
+    build: Postgres
+    ports:
+    - "5432:5432"
