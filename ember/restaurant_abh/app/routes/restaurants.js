@@ -30,7 +30,6 @@ export default Ember.Route.extend({
 
     var tempData = self.get('filter');
     tempData = JSON.parse(JSON.stringify(tempData));
-    tempData.location = null;
     tempData.priceRange = null;
 
     //Get number of pages for display restaurants

@@ -31,12 +31,22 @@ export default Ember.Route.extend({
     cancelReservation(idReservation){
       var self = this;
 
-      //Show notification
-      $(".loginNotifications").show();
-      //Change alert class
-      $(".alert").addClass('alert-success').removeClass('alert-danger');
-      //Set alert text
-      $(".alertText").html('Reservation canceled');
+      //Get list of all restaurants from database
+      this.get('ajax').ajaxRequest("/api/v1/cancelReservation", "POST", '{"idReservation": '+idReservation+'}',
+        false).fail(function(data) {
+          console.log(data);
+        }).then(function(data) {
+          self.refresh();
+
+          //Show notification
+          $(".loginNotifications").show();
+          //Change alert class
+          $(".alert").addClass('alert-success').removeClass('alert-danger');
+          //Set alert text
+          var json = JSON.parse(data);
+          //Set alert text
+          $(".alertText").html(json["ok"]);
+        });
     }
   }
 });
