@@ -14,14 +14,14 @@ describe "Reserve now mandatory fields and valid reservation" do
   let(:reserve) { @homepage.get_main.get_reserve }
 
 
- context "Click on login in navigation" do
+context "Click on login in navigation" do
     it "opens login page" do
       login_header= login.click_on_navigation_login
       expect(login_header).to match(/login/i) 
       end
     end
 
-  context "Fill in valid email, password and click login" do
+context "Fill in valid email, password and click login" do
     it "login fill and click successfully" do
       login.fill_in_email(email)
       login.fill_in_password(password)

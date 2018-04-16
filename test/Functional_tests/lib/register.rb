@@ -59,7 +59,7 @@ def fill_in_confirm_password(password)
   def click_on_create_account_button
     @session.within(:register_area) do
       @session.click_button('Create Account')
-      sleep(1)
+      sleep(5)
       @session.driver.browser.find_element(:css,"a.dropdown-toggle").text    
     end
   end

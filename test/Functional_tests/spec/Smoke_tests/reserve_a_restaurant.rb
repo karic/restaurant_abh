@@ -30,6 +30,7 @@ let(:login) { @homepage.get_main.get_login }
 
 context "Click on home in navigation" do
     it "opens home page" do
+      sleep(2)
       home_header= main.click_on_navigation_home
       expect(home_header).to match(/make a free reservation/i)
       end

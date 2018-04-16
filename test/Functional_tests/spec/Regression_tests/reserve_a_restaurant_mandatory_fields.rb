@@ -1,4 +1,6 @@
 require './spec_helper'
+require 'selenium-webdriver'
+require 'rubygems'
 
 email = "irfankr91@gmail.com"
 password = "12345"
@@ -31,6 +33,7 @@ describe "Find a table mandatory fields" do
 
 context "Click on home in navigation" do
     it "opens home page" do
+      sleep(2)
       home_header= main.click_on_navigation_home
       expect(home_header).to match(/make a free reservation/i)
       end
