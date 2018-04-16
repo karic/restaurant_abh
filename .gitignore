@@ -51,3 +51,6 @@ Play/puppet/.tmp
 Play/puppet/modules/*
 !Play/puppet/modules/restaurant_abh
 !Play/puppet/modules/download_uncompress
+
+
+.librarian
