@@ -1,0 +1,13 @@
+version: '3'
+services:
+  play:
+    build: Play
+    tty: true
+    ports: 
+    - "9000:9000"
+    links:
+    - postgres
+  postgres:
+    build: Postgres
+    expose:
+    - "5432"
