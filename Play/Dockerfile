@@ -8,4 +8,4 @@ WORKDIR /usr/share/app
 ADD --chown=vagrant . .
 RUN sudo chmod +x /usr/share/app/Docker/app/provision.sh
 RUN /usr/share/app/Docker/app/provision.sh
-CMD ["/opt/play/activator", "run"]
+CMD ["/usr/share/app/dep/universal/stage/bin/restaurant_abh"]

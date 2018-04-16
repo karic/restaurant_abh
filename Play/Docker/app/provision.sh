@@ -16,7 +16,7 @@ sudo apt-get install -y default-jdk
 cd /usr/share/app
 echo "Set ./conf/application.conf"
 sed -i 's/^[^#]b\.default\.driver.*$/db.default.driver=org.postgresql.Driver/gm' ./conf/application.conf 
-sed -i 's/^[^#]b\.default\.url.*$/db.default.url="jdbc:postgresql:\/\/127.0.0.1:5432\/restaurant_abh"/gm' ./conf/application.conf 
+sed -i 's/^[^#]b\.default\.url.*$/db.default.url="jdbc:postgresql:\/\/postgres:5432\/restaurant_abh"/gm' ./conf/application.conf 
 sed -i 's/^[^#]b\.default\.user.*$/db.default.user=abh/gm' ./conf/application.conf 
 sed -i 's/^[^#]b\.default\.password.*$/db.default.password="password"/gm' ./conf/application.conf 
 
@@ -101,5 +101,13 @@ cd /usr/share/app/
 echo "Running ember build script"
 ./build-ember.sh 
 
+sudo mkdir -p /var/run/activator
+sudo chown vagrant /var/run/activator
+echo "d! /var/run/activator 744 vagrant vagrant - -" | sudo tee /etc/tmpfiles.d/activator.conf
+
+
 cd /usr/share/app/
 activator stage
+sudo mkdir /usr/share/app/dep
+sudo chown vagrant /usr/share/app/dep
+cp -r `sudo find / -name 'restaurant_abh' | grep -P -o ".+?(?=/target/universal/stage/bin/restaurant_abh)"`/target/* /usr/share/app/dep/
