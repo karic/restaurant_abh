@@ -17,8 +17,8 @@ end
 def click_on_navigation_home
     @session.within(:menu_area) do
     @session.find_link('Home').click
-    sleep(30)
-    @session.driver.browser.find_element(:css,"div.background > h1").text
+    #sleep(30)
+    #@session.driver.browser.find_element(:css,"div.background > h1").text
   end
 end
 

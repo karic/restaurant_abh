@@ -1,18 +1,6 @@
 set -e set -x
 
-echo "Updating and upgrading the system"
-sudo apt-get update -y  
-sudo apt-get upgrade -y 
-sudo apt-get install -y curl apt-utils wget git
-#Insecure write your own script here
-curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-sudo apt-get install -y nodejs
 
-
-echo "Installing default-jre"
-sudo apt-get install -y default-jre 
-echo "Installing default-jdk"
-sudo apt-get install -y default-jdk 
 cd /usr/share/app
 echo "Set ./conf/application.conf"
 sed -i 's/^[^#]b\.default\.driver.*$/db.default.driver=org.postgresql.Driver/gm' ./conf/application.conf 
@@ -28,9 +16,7 @@ production.application.mode=prod
 EOF
 
 
-echo "Installing unzip and npm"
-sudo apt-get install -y unzip 
-#sudo apt-get install -y npm  
+
 
 
 
@@ -66,12 +52,7 @@ else
 EOF
 fi
 
-cd /usr/share/app
-echo "Adding alias node to nodejs"
-if [ ! -f "/usr/bin/node" ]; then
-    sudo ln -sf `which nodejs` /usr/bin/node 
-fi
-echo "Installing ember-cli and bower with npm"
+
 
 
 

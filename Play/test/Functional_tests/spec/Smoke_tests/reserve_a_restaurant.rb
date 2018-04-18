@@ -28,16 +28,18 @@ let(:login) { @homepage.get_main.get_login }
     end
   end
 
-context "Click on home in navigation" do
-    it "opens home page" do
-      sleep(2)
-      home_header= main.click_on_navigation_home
-      expect(home_header).to match(/make a free reservation/i)
-      end
-    end
+# context "Click on home in navigation" do
+#     it "opens home page" do
+#       sleep(2)
+#       home_header= main.click_on_navigation_home
+#       expect(home_header).to match(/make a free reservation/i)
+#       end
+#     end
 
   context "Fill in valid restaurant name, pick how many people, date and hour" do
     it "reservation fill and find a table click successfully" do
+      main.click_on_navigation_home
+      sleep(30)
       reserve.fill_in_restaurant_name(restaurant_name)
       reserve.pick_how_many_people(how_many_people)
       #reserve.pick_date(date)

@@ -1,5 +1,22 @@
 #!/bin/bash
-sudo apt-get install -y curl apt-utils wget git unzip default-jre default-jdk
+echo "Updating and upgrading the system"
+sudo apt-get update -y  
+sudo apt-get upgrade -y 
+sudo apt-get install -y curl apt-utils wget git
+#Insecure write your own script here
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+
+echo "Installing default-jre"
+sudo apt-get install -y default-jre 
+echo "Installing default-jdk"
+sudo apt-get install -y default-jdk 
+
+echo "Installing unzip and npm"
+sudo apt-get install -y unzip 
+#sudo apt-get install -y npm  
+
 
         echo "Making /opt/play"
         sudo mkdir /opt/play
@@ -19,4 +36,14 @@ sudo apt-get install -y curl apt-utils wget git unzip default-jre default-jdk
         chmod +x `which activator/activator` 
     cat <<EOF | sudo tee /etc/profile.d/10-activator.sh
     #!/bin/sh
-    export PATH=$PATH:/opt/play/activator
+    export PATH=$PATH:/opt/play/activator 
+EOF
+
+
+
+cd /usr/share/app
+echo "Adding alias node to nodejs"
+if [ ! -f "/usr/bin/node" ]; then
+    sudo ln -sf `which nodejs` /usr/bin/node 
+fi
+echo "Installing ember-cli and bower with npm"

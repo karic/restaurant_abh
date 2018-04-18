@@ -1,15 +1,5 @@
-FROM ubuntu:16.04
-RUN apt-get update && \
-      apt-get -y install sudo
-RUN useradd -ms /bin/bash vagrant | chpasswd && adduser vagrant sudo
-RUN echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-USER vagrant
-WORKDIR /usr/share/app
-COPY . .
-#RUN /usr/share/app/Docker/app/activator_install.sh
-#RUN export PATH=$PATH:/opt/play/activator                                                                                       
-#ENV PATH="${PATH}:/opt/play/activator"
-#RUN activator stage
-ADD --chown=vagrant . .
+FROM karic/restaurant_abh_base
+
+ADD --chown=vagrant . . 
 RUN /usr/share/app/Docker/app/provision.sh
 CMD ["/usr/share/app/dep/universal/stage/bin/restaurant_abh"]
