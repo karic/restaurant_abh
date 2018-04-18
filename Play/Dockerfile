@@ -5,7 +5,11 @@ RUN useradd -ms /bin/bash vagrant | chpasswd && adduser vagrant sudo
 RUN echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER vagrant
 WORKDIR /usr/share/app
+COPY . .
+#RUN /usr/share/app/Docker/app/activator_install.sh
+#RUN export PATH=$PATH:/opt/play/activator                                                                                       
+#ENV PATH="${PATH}:/opt/play/activator"
+#RUN activator stage
 ADD --chown=vagrant . .
-RUN sudo chmod +x /usr/share/app/Docker/app/provision.sh
 RUN /usr/share/app/Docker/app/provision.sh
 CMD ["/usr/share/app/dep/universal/stage/bin/restaurant_abh"]
