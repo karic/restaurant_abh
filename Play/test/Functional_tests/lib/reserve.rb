@@ -202,9 +202,8 @@ def click_on_cancel_reservation_button(restaurant_name, peoplenm)
   people= cancel_reservation.find_element(:css,"div.col-md-10.complete_reservation_restaurant_details > div.row > div.col-md-2 > div.details").text
   #hour=cancel_reservation.find_element(:css,"div.col-md-10.complete_reservation_restaurant_details > div > div > div").text 
   if name==restaurant_name and people==peoplenm then @session.click_button('Cancel reservation') end
-  if name==restaurant_name and people==peoplenm then true end
-  #@session.driver.browser.find_element(:css, "div.alertText").text
-  end
+  @session.driver.browser.find_element(:xpath, "//div[@id='main']/div[@class='container']").text  
+end
 end
 
 end

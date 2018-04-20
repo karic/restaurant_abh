@@ -1,6 +1,12 @@
 environment: 
   url: http://localhost:9000/
+  domain: http://localhost
+  port: 9000
+  apiversion: /api/v1 
   headless: true
   web:
     driver: firefox
-    
+variables:
+  email: irfankr91@gmail.com
+  password: 12345
+  rememberMe: true    

@@ -24,8 +24,8 @@ RSpec.configure do |config|
 
   config.before(:all) do
       if setup.headless then
-        $headless = Headless.new
-        $headless.start
+        @headless = Headless.new
+        @headless.start
       end
      #@headless=Headless.new(destroy_at_exit: true).start 
     puts "Loading session..."
@@ -38,7 +38,7 @@ RSpec.configure do |config|
       @homepage.quit
       sleep 2
       if setup.headless then
-       $headless.destroy
+       @headless.destroy
       end
     end
   # rspec-expectations config goes here. You can use an alternate

@@ -1,10 +1,10 @@
 require 'rest-client'
 require 'json'
+require './setup_browser'
 
-domain="http://localhost"
-port="9000"
-apiversion="/api/v1"
-url=domain+":"+port+apiversion
+setup = SetupBrowser.new
+
+url = setup.domain.to_s + ":" + setup.port.to_s + setup.apiversion.to_s
 
 describe "API test: add review (new user and restaurant)" do
 

@@ -1,10 +1,10 @@
 require 'rest-client'
 require 'json'
+require './setup_browser'
 
-domain="http://localhost"
-port="9000"
-apiversion="/api/v1"
-url=domain+":"+port+apiversion
+setup = SetupBrowser.new
+
+url = setup.domain.to_s + ":" + setup.port.to_s + setup.apiversion.to_s
 
 describe "API test: make a reservation in existing restaurant" do
 
@@ -34,19 +34,19 @@ context "Log in as admin user" do
 
 context "Register a new user" do
     it "new user registered successfully" do
-    register= RestClient.post(url+'/register', {email:'noviuser@gmail.com',firstName:'Novi',lastName:'Korisnik',Phone:'13215156',country:'BiH',city:'Maglaj',password:'10062016'})
+    register= RestClient.post(url+'/register', {email:'noviuserxx@gmail.com',firstName:'Novi',lastName:'Korisnik',Phone:'13215156',country:'BiH',city:'Maglaj',password:'10062016'})
     parsed = JSON.parse(register.body)
     @id_user[:id]= parsed['id']
     expect(register.code).to match(200)
     expect(parsed['firstName']).to match(/Novi/i)
     expect(parsed['lastName']).to match(/Korisnik/i)
-    expect(parsed['email']).to match(/noviuser@gmail.com/i)
+    expect(parsed['email']).to match(/noviuserxx@gmail.com/i)
     end
   end
 
 context "Log in user" do
     it "user logs in successfully" do
-      login= RestClient.post(url+'/login', {email:'noviuser@gmail.com',password:'10062016', rememberMe:'false'})
+      login= RestClient.post(url+'/login', {email:'noviuserxx@gmail.com',password:'10062016', rememberMe:'false'})
       parsed = JSON.parse(login.body)
       id_current= parsed['id']
       @id_token_user[:id]= parsed['token']

@@ -9,13 +9,16 @@ require_all './lib/'
 
 class SetupBrowser
 
-  attr_accessor :web, :url, :headless
+  attr_accessor :web, :url, :headless, :domain, :port, :apiversion
 
   def initialize
     config = YAML.load(File.open('./config/environment.yaml'))['environment']
     self.web       = config['web']
     self.url       = config['url']
     self.headless = config['headless']
+    self.domain = config['domain']
+    self.port = config ['port']
+    self.apiversion = config ['apiversion']
     Capybara.default_selector = :xpath
     Capybara.default_max_wait_time = 30
   end

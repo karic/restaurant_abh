@@ -1,12 +1,12 @@
 require 'rest-client'
 require 'json'
+require './setup_browser'
 
-domain="http://localhost"
-port="9000"
-apiversion="/api/v1"
-url=domain+":"+port+apiversion
+setup = SetupBrowser.new
 
-describe "API smoke test" do
+url = setup.domain.to_s + ":" + setup.port.to_s + setup.apiversion.to_s
+
+describe "API test: search and filter" do
 
 before(:all) do 
   @id_token = { :id=>"" }
@@ -15,6 +15,9 @@ before(:all) do
   @id_restaurant = { :id=>"" }
   @id_user = { :id=>"" }
   @id_token_user = { :id=>"" }
+  @category_name = { :id=>"" }
+  @location_name = { :id=>"" }
+
 end
 
 context "Log in as admin user" do
@@ -76,6 +79,8 @@ context "Search for a newly added restaurant" do
     it "restaurant found succesfully" do
       reserve= RestClient.post(url+'/admin/getFilteredRestaurants', {"itemsPerPage":6,"pageNumber":"1","searchText": "Restaurant test"}, :'X-AUTH-TOKEN'=>@id_token[:id])
       parsed = JSON.parse(reserve.body)
+      @category_name[:id]=parsed['restaurants'][0]['foodType']
+      @location_name[:id]=parsed['restaurants'][0]['location']
       expect(reserve.code).to match(200)
       expect(parsed['restaurants'][0]['restaurantName']).to match(/Restaurant test/i)
       expect(parsed['restaurants'][0]['id']).to match @id_restaurant[:id]
@@ -84,19 +89,19 @@ context "Search for a newly added restaurant" do
 
 context "Search for a newly added restaurant's category" do
     it "restaurant found succesfully" do
-      reserve= RestClient.post(url+'/admin/getRestaurantCategories', {"idRestaurant":@id_restaurant[:id]}, :'X-AUTH-TOKEN'=>@id_token[:id])
+      reserve= RestClient.post(url+'/admin/getFilteredCategories', {"itemsPerPage":6,"pageNumber":"1","searchText":@category_name[:id]}, :'X-AUTH-TOKEN'=>@id_token[:id])
       parsed = JSON.parse(reserve.body)
       expect(reserve.code).to match(200)
-      expect(parsed[0]['id']).to match @id_category[:id] 
+      expect(parsed['categories'][0]['id']).to match @id_category[:id] 
       end
     end
 
 context "Search for a newly added restaurant's location" do
     it "restaurant found succesfully" do
-      reserve= RestClient.post(url+'/admin/getRestaurantLocation', {"idRestaurant":@id_restaurant[:id]}, :'X-AUTH-TOKEN'=>@id_token[:id])
+      reserve= RestClient.post(url+'/admin/getFilteredLocations', {"itemsPerPage":6,"pageNumber":"1","searchText":@location_name[:id]}, :'X-AUTH-TOKEN'=>@id_token[:id])
       parsed = JSON.parse(reserve.body)
       expect(reserve.code).to match(200)
-      expect(parsed[0]['id']).to match @id_location[:id] 
+      expect(parsed['locations'][0]['id']).to match @id_location[:id] 
       end
     end
 
