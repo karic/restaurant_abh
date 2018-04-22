@@ -1,4 +1,5 @@
-FROM karic/restaurant_abh_base
+#FROM karic/restaurant_abh_base
+FROM karic/restaurant_abh_play
 WORKDIR /usr/share/app
 #RUN sudo rm -rf ./*
 ADD --chown=vagrant . .
