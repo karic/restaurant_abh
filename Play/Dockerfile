@@ -3,7 +3,6 @@ FROM karic/restaurant_abh_play
 WORKDIR /usr/share/app
 #RUN sudo rm -rf ./*
 ADD --chown=vagrant . .
-RUN /usr/share/app/Docker/app/provision.sh
 RUN rm -rf /home/vagrant/.sbt/0.13/staging/
 RUN sudo mkdir -p /usr/share/app/dep/universal/stage/conf
 RUN sudo chown -R vagrant /usr/share/app/dep/
