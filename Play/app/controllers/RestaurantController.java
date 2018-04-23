@@ -271,16 +271,14 @@ public class RestaurantController extends Controller {
 
         //LOCIRANJE
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        String sqlString = "SELECT *, st_distance_sphere(st_makepoint(?, ?), st_makepoint(rest.latitude, rest.longitude)) AS distance FROM restaurants rest ";
-        int startingParametersCount = 2;
+        String sqlString = "SELECT * FROM restaurants rest ";
+        int startingParametersCount = 0;
 
         //List of parameters
         ArrayList<Object> filterParameters = new ArrayList();
 
         //Add location parameters
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        filterParameters.add(latitude);
-        filterParameters.add(longitude);
 
         //Add filters
         //Price range
@@ -357,8 +355,8 @@ public class RestaurantController extends Controller {
         //sqlString += "ORDER BY rest.id ASC ";
 
         //Sort by distance
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        sqlString += "ORDER BY distance ASC ";
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        sqlString += "ORDER BY id ASC ";
 
         //Get segment of display restaurants for pagination
         long offsetRestaurants = (newRestaurantFilter.getPageNumber()) * newRestaurantFilter.getItemsPerPage() - newRestaurantFilter.getItemsPerPage();
@@ -511,7 +509,7 @@ public class RestaurantController extends Controller {
 
         //SORTIRANJE NAJBLIZIH
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        List<Restaurant> restaurants = JPA.em().createNativeQuery("SELECT *, st_distance_sphere(st_makepoint(?, ?), st_makepoint(rst.latitude, rst.longitude)) AS distance FROM restaurants rst ORDER BY distance ASC nulls last LIMIT 6", Restaurant.class).setParameter(1, latitude).setParameter(2, longitude).getResultList();
+        List<Restaurant> restaurants = JPA.em().createNativeQuery("SELECT * FROM restaurants rst ORDER BY id ASC nulls last LIMIT 6", Restaurant.class).setParameter(1, latitude).setParameter(2, longitude).getResultList();
 
         //PRIVREMENO
         //List<Restaurant> restaurants = JPA.em().createNativeQuery("SELECT *, (SELECT COUNT(rs.id) FROM reservations rs, restauranttables rt WHERE date_part('day', rs.reservationDateTime) = date_part('day', NOW()) AND rs.idTable = rt.id AND restaurants.id = rt.idRestaurant GROUP BY rt.idRestaurant) AS sortingnumber FROM restaurants ORDER BY sortingnumber DESC nulls last LIMIT 6", Restaurant.class).getResultList();
