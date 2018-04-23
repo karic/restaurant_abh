@@ -90,5 +90,5 @@ echo "d! /var/run/activator 744 vagrant vagrant - -" | sudo tee /etc/tmpfiles.d/
 cd /usr/share/app/
 activator stage
 sudo mkdir /usr/share/app/dep
-sudo chown vagrant /usr/share/app/dep
+sudo chown -R vagrant /usr/share/app/dep
 #cp -r `sudo find / -name 'restaurant_abh' | grep -P -o ".+?(?=/target/universal/stage/bin/restaurant_abh)"`/target/* /usr/share/app/dep/
