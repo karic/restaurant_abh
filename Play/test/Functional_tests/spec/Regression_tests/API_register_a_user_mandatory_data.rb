@@ -6,10 +6,10 @@ setup = SetupBrowser.new
 
 url = setup.domain.to_s + ":" + setup.port.to_s + setup.apiversion.to_s
 
-describe "API test: register a user with empty data" do
+describe "API negative test: register a user with empty data" do
 
 context "Register a new user with empty first name" do
-    it "new user not registered sucessfully" do
+    it "new user not registered successfully" do
 	body = begin
     RestClient.post(url+'/register', {"email":"noviuser123@gmail.com","firstName":"","lastName":"Korisnik","Phone":"13215156","country":"BiH","city":"Maglaj","password":"10062016"})
     rescue => e
@@ -21,7 +21,7 @@ context "Register a new user with empty first name" do
   end
 
 context "Register a new user with empty last name" do
-    it "new user not registered sucessfully" do
+    it "new user not registered successfully" do
     body = begin
     RestClient.post(url+'/register', {"email":"noviuser123@gmail.com","firstName":"Novi","lastName":"","Phone":"13215156","country":"BiH","city":"Maglaj","password":"10062016"})
     rescue => e
@@ -33,7 +33,7 @@ context "Register a new user with empty last name" do
   end
 
 context "Register a new user with empty email" do
-    it "new user not registered sucessfully" do
+    it "new user not registered successfully" do
     body = begin
     RestClient.post(url+'/register', {"email":"","firstName":"Novi","lastName":"Korisnik","Phone":"13215156","country":"BiH","city":"Maglaj","password":"10062016"})
     rescue => e
@@ -45,7 +45,7 @@ context "Register a new user with empty email" do
 end
 
 context "Register a new user with empty country" do
-    it "new user not registered sucessfully" do
+    it "new user not registered successfully" do
     body = begin
     RestClient.post(url+'/register', {"email":"noviuser@gmail.com","firstName":"Novi","lastName":"Korisnik","Phone":"13215156","country":"","city":"Maglaj","password":"10062016"})
     rescue => e
@@ -57,7 +57,7 @@ context "Register a new user with empty country" do
 end
 
 context "Register a new user with empty city" do
-    it "new user not registered sucessfully" do
+    it "new user not registered successfully" do
     body = begin
     RestClient.post(url+'/register', {"email":"noviuser@gmail.com","firstName":"Novi","lastName":"Korisnik","Phone":"13215156","country":"BiH","city":"","password":"10062016"})
     rescue => e
@@ -69,7 +69,7 @@ context "Register a new user with empty city" do
 end
 
 context "Register a new user with empty password" do
-    it "new user not registered sucessfully" do
+    it "new user not registered successfully" do
     body = begin
     RestClient.post(url+'/register', {"email":"noviuser@gmail.com","firstName":"Novi","lastName":"Korisnik","Phone":"13215156","country":"BiH","city":"Maglaj","password":""})
     rescue => e
@@ -81,7 +81,7 @@ context "Register a new user with empty password" do
 end
 
 context "Register a new user wtih empty phone number" do
-    it "new user not registered sucessfully" do
+    it "new user not registered successfully" do
     body = begin
     RestClient.post(url+'/register', {email:'noviuser262@gmail.com',firstName:'Novi',lastName:'Korisnik',Phone:'',country:'BiH',city:'Maglaj',password:'10062016'})
     rescue => e

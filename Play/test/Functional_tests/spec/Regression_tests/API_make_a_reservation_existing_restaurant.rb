@@ -20,7 +20,7 @@ before(:all) do
 end
 
 context "Log in as admin user" do
-    it "admin user logs in sucessfully" do
+    it "admin user logs in successfully" do
       login= RestClient.post(url+'/login', {email:setup.email.to_s,password:setup.password.to_s, rememberMe:setup.rememberMe.to_s})
       parsed = JSON.parse(login.body)
       id_admin_user= parsed['id']
@@ -66,7 +66,7 @@ context "Search for a restaurant" do
     end
 
 context "Make a reservation" do
-    it "reservation in sucessfully" do
+    it "reservation in successfully" do
       reserve= RestClient.post(url+'/makeReservation', {"persons":"2 people","reservationDate":"Apr 21, 2018","reservationHour":"11:00 AM","idRestaurant":@id_restaurant[:id]}, :'X-AUTH-TOKEN'=>@id_token_user[:id])
       parsed = JSON.parse(reserve.body)
       @id_reservation[:id] = parsed['id']
@@ -76,7 +76,7 @@ context "Make a reservation" do
     end
 
 context "Get list of reservations for current user" do
-    it "new reservation is succesfully added" do
+    it "new reservation is successfully added" do
       reserve= RestClient.get(url+'/getListOfReservationsForUser', :'X-AUTH-TOKEN'=>@id_token_user[:id])
       parsed = JSON.parse(reserve.body)
       expect(reserve.code).to match(200)
@@ -85,7 +85,7 @@ context "Get list of reservations for current user" do
     end
 
 context "Cancel a reservation" do
-    it "reservation is canceled sucessfully" do
+    it "reservation is canceled successfully" do
       reserve= RestClient.post(url+'/cancelReservation', {idReservation:@id_reservation[:id]}, :'X-AUTH-TOKEN'=>@id_token_user[:id])
       parsed = JSON.parse(reserve.body)
       expect(reserve.code).to match(200)
@@ -93,14 +93,14 @@ context "Cancel a reservation" do
     end
 
 context "Delete newly added user" do
-    it "admin deletes newly added user sucessfully" do
+    it "admin deletes newly added user successfully" do
       restaurant= RestClient.post(url+'/admin/deleteUser', {id:@id_user[:id]}, :'X-AUTH-TOKEN'=>@id_token[:id])
       expect(restaurant.code).to match(200) 
     end
     end
 
 context "Logout admin user" do
-    it "admin logged out sucessfully" do
+    it "admin logged out successfully" do
       logout= RestClient.get(url+'/logout', :'X-AUTH-TOKEN'=>@id_token[:id])
       expect(logout.code).to match(200) 
     end

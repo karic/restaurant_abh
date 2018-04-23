@@ -9,7 +9,7 @@ url = setup.domain.to_s + ":" + setup.port.to_s + setup.apiversion.to_s
 describe "API negative test: invalid login" do
 
 context "Login with invalid password" do
-  it "user does not log in sucessfully" do
+  it "user does not log in successfully" do
     for i in 1..5
       body = begin
       RestClient.post(url+'/login', {email:setup.email.to_s,password:setup.password.to_s, rememberMe:setup.rememberMe.to_s})
@@ -21,10 +21,9 @@ context "Login with invalid password" do
     end
   end
 end
-end
 
 context "Login with invalid password" do
-    it "user does not log in sucessfully" do
+    it "user does not log in successfully" do
       body = begin
       RestClient.post(url+'/login', {email:setup.email.to_s,password:setup.password.to_s, rememberMe:setup.rememberMe.to_s})
       rescue => e
