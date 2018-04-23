@@ -6,7 +6,6 @@ environment:
   headless: true
   web:
     driver: firefox
-variables:
   email: irfankr91@gmail.com
   password: 12345
-  rememberMe: true    
+  rememberMe: false

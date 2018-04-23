@@ -17,7 +17,7 @@ end
 
 context "Log in as admin user" do
     it "admin user logs in sucessfully" do
-      login= RestClient.post(url+'/login', {email:'irfankr91@gmail.com',password:'12345', rememberMe:'false'})
+      login= RestClient.post(url+'/login', {email:setup.email.to_s,password:setup.password.to_s, rememberMe:setup.rememberMe.to_s})
       parsed = JSON.parse(login.body)
       id_admin_user= parsed['id']
       @id_token[:id]= parsed['token']
